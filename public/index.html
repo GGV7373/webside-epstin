@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The Epstein Files - A comprehensive investigative archive of documents, connections, and evidence.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="The Epstein Files - Documents, videos, and evidence archive.">
     <meta name="theme-color" content="#0a0a0f">
     <title>The Epstein Files</title>
     <link rel="stylesheet" href="css/styles.css">
@@ -13,70 +15,49 @@
     <!-- STICKY NAVIGATION -->
     <nav id="main-nav" class="navbar">
         <div class="nav-container">
-            <a href="#hero" class="nav-brand" id="nav-brand"></a>
+            <a href="#top" class="nav-brand">The Epstein Files</a>
             <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
                 <span class="hamburger"></span>
             </button>
             <ul class="nav-links" id="nav-links">
-                <li><a href="#timeline" class="nav-link">Timeline</a></li>
-                <li><a href="#key-figures" class="nav-link">Key Figures</a></li>
+                <li><a href="#videos" class="nav-link">Videos</a></li>
                 <li><a href="#documents" class="nav-link">Documents</a></li>
-                <li><a href="#gallery" class="nav-link">Gallery</a></li>
-                <li><a href="#resources" class="nav-link">Resources</a></li>
+                <li><a href="#images" class="nav-link">Images</a></li>
+                <li><a href="#notes" class="nav-link">Notes</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <header id="hero" class="hero">
-        <div class="hero-content">
-            <h1 id="hero-title"></h1>
-            <p class="hero-subtitle" id="hero-subtitle"></p>
-            <p class="hero-tagline" id="hero-tagline"></p>
-            <a href="#timeline" class="hero-cta">Explore the Evidence</a>
-        </div>
-    </header>
-
     <main>
-        <!-- TIMELINE SECTION -->
-        <section id="timeline" class="section">
+        <!-- VIDEOS SECTION -->
+        <section id="videos" class="section">
             <div class="section-container">
-                <h2 class="section-title">Timeline of Events</h2>
-                <div class="timeline" id="timeline-container"></div>
-            </div>
-        </section>
-
-        <!-- KEY FIGURES SECTION -->
-        <section id="key-figures" class="section section-alt">
-            <div class="section-container">
-                <h2 class="section-title">Key Figures</h2>
-                <div class="figures-grid" id="figures-container"></div>
+                <h2 class="section-title">Videos</h2>
+                <div class="media-grid" id="videos-container"></div>
             </div>
         </section>
 
         <!-- DOCUMENTS SECTION -->
-        <section id="documents" class="section">
+        <section id="documents" class="section section-alt">
             <div class="section-container">
                 <h2 class="section-title">Documents</h2>
-                <div class="filter-tabs" id="docs-filter"></div>
                 <div class="docs-list" id="docs-container"></div>
             </div>
         </section>
 
-        <!-- GALLERY SECTION -->
-        <section id="gallery" class="section section-alt">
+        <!-- IMAGES SECTION -->
+        <section id="images" class="section">
             <div class="section-container">
-                <h2 class="section-title">Gallery</h2>
-                <div class="filter-tabs" id="gallery-filter"></div>
+                <h2 class="section-title">Images</h2>
                 <div class="gallery-grid" id="gallery-container"></div>
             </div>
         </section>
 
-        <!-- RESOURCES SECTION -->
-        <section id="resources" class="section">
+        <!-- NOTES SECTION -->
+        <section id="notes" class="section section-alt">
             <div class="section-container">
-                <h2 class="section-title">Resources</h2>
-                <div class="resources-list" id="resources-container"></div>
+                <h2 class="section-title">Notes</h2>
+                <div class="notes-list" id="notes-container"></div>
             </div>
         </section>
     </main>
@@ -84,7 +65,7 @@
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-container">
-            <p id="footer-text"></p>
+            <p>For informational and educational purposes only.</p>
         </div>
     </footer>
 
@@ -93,6 +74,18 @@
         <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
         <img class="lightbox-img" id="lightbox-img" src="" alt="">
         <p class="lightbox-caption" id="lightbox-caption"></p>
+    </div>
+
+    <!-- PDF VIEWER OVERLAY -->
+    <div class="pdf-viewer" id="pdf-viewer">
+        <div class="pdf-header">
+            <span class="pdf-title" id="pdf-title"></span>
+            <div class="pdf-actions">
+                <button class="pdf-open-tab" id="pdf-open-tab" aria-label="Open in new tab">Open in tab</button>
+                <button class="pdf-close" id="pdf-close" aria-label="Close">&times;</button>
+            </div>
+        </div>
+        <iframe class="pdf-frame" id="pdf-frame" src="" title="PDF document"></iframe>
     </div>
 
     <script src="js/data.js"></script>

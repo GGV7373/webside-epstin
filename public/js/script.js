@@ -1,222 +1,118 @@
-document.addEventListener('DOMContentLoaded', () => {
-    renderMeta();
-    renderTimeline();
-    renderKeyFigures();
+document.addEventListener('DOMContentLoaded', function () {
+    renderVideos();
     renderDocuments();
-    renderGallery();
-    renderResources();
-
+    renderImages();
+    renderNotes();
     setupNavigation();
     setupScrollSpy();
     setupLightbox();
+    setupPdfViewer();
 });
 
-// --- Render site metadata ---
-function renderMeta() {
-    const { siteTitle, siteSubtitle, heroTagline, footerText } = SITE_DATA.meta;
+// --- Render videos ---
+function renderVideos() {
+    var container = document.getElementById('videos-container');
+    if (!container || !SITE_DATA.videos) return;
 
-    document.getElementById('nav-brand').textContent = siteTitle;
-    document.getElementById('hero-title').textContent = siteTitle;
-    document.getElementById('hero-subtitle').textContent = siteSubtitle;
-    document.getElementById('hero-tagline').textContent = heroTagline;
-    document.getElementById('footer-text').textContent = footerText;
-    document.title = siteTitle;
-}
+    SITE_DATA.videos.forEach(function (video) {
+        var card = document.createElement('div');
+        card.className = 'video-card';
 
-// --- Render timeline ---
-function renderTimeline() {
-    var container = document.getElementById('timeline-container');
-    if (!container || !SITE_DATA.timeline) return;
+        var videoEl = document.createElement('video');
+        videoEl.controls = true;
+        videoEl.preload = 'metadata';
+        videoEl.playsInline = true;
+        videoEl.setAttribute('controlsList', 'nodownload');
 
-    SITE_DATA.timeline.forEach(function (entry, index) {
-        var side = index % 2 === 0 ? 'left' : 'right';
+        var source = document.createElement('source');
+        source.src = 'videos/' + video.filename;
+        source.type = 'video/mp4';
+        videoEl.appendChild(source);
 
-        var div = document.createElement('div');
-        div.className = 'timeline-entry ' + side + ' fade-in';
-        div.style.animationDelay = (index * 0.1) + 's';
+        var label = document.createElement('div');
+        label.className = 'video-label';
+        label.textContent = video.id;
 
-        var sourceHTML = '';
-        if (entry.source && entry.sourceLabel) {
-            sourceHTML = '<a href="' + entry.source + '" class="timeline-source" target="_blank" rel="noopener">' + entry.sourceLabel + '</a>';
-        }
-
-        div.innerHTML =
-            '<div class="timeline-card">' +
-                '<div class="timeline-date">' + entry.date + '</div>' +
-                '<h3 class="timeline-title">' + entry.title + '</h3>' +
-                '<p class="timeline-desc">' + entry.description + '</p>' +
-                sourceHTML +
-            '</div>';
-
-        container.appendChild(div);
+        card.appendChild(videoEl);
+        card.appendChild(label);
+        container.appendChild(card);
     });
 }
 
-// --- Render key figures ---
-function renderKeyFigures() {
-    var container = document.getElementById('figures-container');
-    if (!container || !SITE_DATA.keyFigures) return;
+// --- Render documents ---
+function renderDocuments() {
+    var container = document.getElementById('docs-container');
+    if (!container || !SITE_DATA.documents) return;
 
-    SITE_DATA.keyFigures.forEach(function (figure, index) {
-        var card = document.createElement('div');
-        card.className = 'figure-card fade-in';
-        card.style.animationDelay = (index * 0.15) + 's';
-
-        var sourcesHTML = '';
-        if (figure.sources) {
-            sourcesHTML = figure.sources.map(function (s) {
-                return '<a href="' + s.url + '" class="figure-source-link" target="_blank" rel="noopener">' + s.label + '</a>';
-            }).join('');
-        }
+    SITE_DATA.documents.forEach(function (doc) {
+        var card = document.createElement('button');
+        card.className = 'doc-card';
+        card.type = 'button';
 
         card.innerHTML =
-            '<img src="' + figure.image + '" alt="' + figure.name + '" class="figure-img" loading="lazy">' +
-            '<div class="figure-info">' +
-                '<h3 class="figure-name">' + figure.name + '</h3>' +
-                '<div class="figure-role">' + figure.role + '</div>' +
-                '<p class="figure-desc">' + figure.description + '</p>' +
-                '<div class="figure-sources">' + sourcesHTML + '</div>' +
-            '</div>';
+            '<div class="doc-icon">PDF</div>' +
+            '<div class="doc-info">' +
+                '<div class="doc-title">' + doc.title + '</div>' +
+                '<div class="doc-filename">' + doc.filename + '</div>' +
+            '</div>' +
+            '<div class="doc-arrow">&#8250;</div>';
+
+        card.addEventListener('click', function () {
+            openPdfViewer(doc.url, doc.title);
+        });
 
         container.appendChild(card);
     });
 }
 
-// --- Render documents with category filter ---
-function renderDocuments() {
-    var filterContainer = document.getElementById('docs-filter');
-    var listContainer = document.getElementById('docs-container');
-    if (!filterContainer || !listContainer || !SITE_DATA.documents) return;
+// --- Render images ---
+function renderImages() {
+    var container = document.getElementById('gallery-container');
+    if (!container || !SITE_DATA.images) return;
 
-    var categories = [];
-    SITE_DATA.documents.forEach(function (d) {
-        if (categories.indexOf(d.category) === -1) {
-            categories.push(d.category);
-        }
+    SITE_DATA.images.forEach(function (item) {
+        var div = document.createElement('div');
+        div.className = 'gallery-item';
+
+        var img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.alt;
+        img.loading = 'lazy';
+
+        var caption = document.createElement('div');
+        caption.className = 'gallery-caption';
+        caption.textContent = item.caption;
+
+        div.appendChild(img);
+        div.appendChild(caption);
+
+        div.addEventListener('click', function () {
+            openLightbox(item.src, item.caption);
+        });
+
+        container.appendChild(div);
     });
+}
 
-    filterContainer.appendChild(createFilterTab('All', 'all', true));
-    categories.forEach(function (cat) {
-        var label = cat.replace(/-/g, ' ');
-        filterContainer.appendChild(createFilterTab(label, cat, false));
-    });
+// --- Render notes ---
+function renderNotes() {
+    var container = document.getElementById('notes-container');
+    if (!container || !SITE_DATA.notes) return;
 
-    SITE_DATA.documents.forEach(function (doc, index) {
+    if (SITE_DATA.notes.length === 0) {
+        container.innerHTML = '<p class="notes-empty">No notes yet. Add notes in data.js.</p>';
+        return;
+    }
+
+    SITE_DATA.notes.forEach(function (note) {
         var card = document.createElement('div');
-        card.className = 'doc-card fade-in';
-        card.dataset.category = doc.category;
-        card.style.animationDelay = (index * 0.1) + 's';
+        card.className = 'note-card';
 
         card.innerHTML =
-            '<div class="doc-info">' +
-                '<h3 class="doc-title">' + doc.title + '</h3>' +
-                '<div class="doc-meta">' +
-                    '<span class="doc-category">' + doc.category.replace(/-/g, ' ') + '</span>' +
-                    '<span>' + doc.date + '</span>' +
-                    '<span>' + doc.pages + ' page' + (doc.pages !== 1 ? 's' : '') + '</span>' +
-                '</div>' +
-                '<p class="doc-desc">' + doc.description + '</p>' +
-            '</div>' +
-            '<a href="' + doc.url + '" class="doc-link" target="_blank" rel="noopener">View PDF</a>';
+            '<h3 class="note-title">' + note.title + '</h3>' +
+            '<div class="note-content">' + note.content + '</div>';
 
-        listContainer.appendChild(card);
-    });
-
-    setupFilterTabs(filterContainer, listContainer);
-}
-
-// --- Render gallery with category filter ---
-function renderGallery() {
-    var filterContainer = document.getElementById('gallery-filter');
-    var gridContainer = document.getElementById('gallery-container');
-    if (!filterContainer || !gridContainer || !SITE_DATA.gallery) return;
-
-    var categories = [];
-    SITE_DATA.gallery.forEach(function (g) {
-        if (categories.indexOf(g.category) === -1) {
-            categories.push(g.category);
-        }
-    });
-
-    filterContainer.appendChild(createFilterTab('All', 'all', true));
-    categories.forEach(function (cat) {
-        filterContainer.appendChild(createFilterTab(cat, cat, false));
-    });
-
-    SITE_DATA.gallery.forEach(function (item, index) {
-        var div = document.createElement('div');
-        div.className = 'gallery-item fade-in';
-        div.dataset.category = item.category;
-        div.style.animationDelay = (index * 0.1) + 's';
-
-        div.innerHTML =
-            '<img src="' + item.src + '" alt="' + item.alt + '" loading="lazy">' +
-            '<div class="gallery-caption">' + item.caption + '</div>';
-
-        div.addEventListener('click', (function (src, caption) {
-            return function () {
-                openLightbox(src, caption);
-            };
-        })(item.src, item.caption));
-
-        gridContainer.appendChild(div);
-    });
-
-    setupFilterTabs(filterContainer, gridContainer);
-}
-
-// --- Render resources ---
-function renderResources() {
-    var container = document.getElementById('resources-container');
-    if (!container || !SITE_DATA.resources) return;
-
-    SITE_DATA.resources.forEach(function (res, index) {
-        var item = document.createElement('div');
-        item.className = 'resource-item fade-in';
-        item.style.animationDelay = (index * 0.1) + 's';
-
-        item.innerHTML =
-            '<span class="resource-type-badge">' + res.type + '</span>' +
-            '<div class="resource-info">' +
-                '<h3 class="resource-title">' +
-                    '<a href="' + res.url + '" target="_blank" rel="noopener">' + res.title + '</a>' +
-                '</h3>' +
-                '<p class="resource-desc">' + res.description + '</p>' +
-            '</div>';
-
-        container.appendChild(item);
-    });
-}
-
-// --- Helpers: filter tabs ---
-function createFilterTab(label, value, isActive) {
-    var btn = document.createElement('button');
-    btn.className = 'filter-tab' + (isActive ? ' active' : '');
-    btn.dataset.filter = value;
-    btn.textContent = label;
-    return btn;
-}
-
-function setupFilterTabs(tabsContainer, itemsContainer) {
-    tabsContainer.addEventListener('click', function (e) {
-        if (!e.target.classList.contains('filter-tab')) return;
-
-        var tabs = tabsContainer.querySelectorAll('.filter-tab');
-        for (var i = 0; i < tabs.length; i++) {
-            tabs[i].classList.remove('active');
-        }
-        e.target.classList.add('active');
-
-        var filter = e.target.dataset.filter;
-        var items = itemsContainer.children;
-
-        for (var j = 0; j < items.length; j++) {
-            if (filter === 'all' || items[j].dataset.category === filter) {
-                items[j].classList.remove('hidden');
-            } else {
-                items[j].classList.add('hidden');
-            }
-        }
+        container.appendChild(card);
     });
 }
 
@@ -304,6 +200,47 @@ function setupLightbox() {
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && lightbox.classList.contains('open')) {
             closeLightbox();
+        }
+    });
+}
+
+// --- PDF Viewer ---
+function openPdfViewer(url, title) {
+    var viewer = document.getElementById('pdf-viewer');
+    var frame = document.getElementById('pdf-frame');
+    var titleEl = document.getElementById('pdf-title');
+
+    titleEl.textContent = title;
+    frame.src = url;
+    viewer.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function setupPdfViewer() {
+    var viewer = document.getElementById('pdf-viewer');
+    var closeBtn = document.getElementById('pdf-close');
+    var openBtn = document.getElementById('pdf-open-tab');
+
+    if (!viewer || !closeBtn) return;
+
+    function closePdfViewer() {
+        viewer.classList.remove('open');
+        document.getElementById('pdf-frame').src = '';
+        document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closePdfViewer);
+
+    if (openBtn) {
+        openBtn.addEventListener('click', function () {
+            var frame = document.getElementById('pdf-frame');
+            window.open(frame.src, '_blank');
+        });
+    }
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && viewer.classList.contains('open')) {
+            closePdfViewer();
         }
     });
 }

@@ -5,7 +5,7 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files first so index.html is served at /
+// Serve static files from public/
 app.use(express.static(path.join(__dirname, 'public')));
 
 // API: List all documents in public/docs, organized by subfolder
@@ -25,12 +25,6 @@ app.get('/api/documents', (req, res) => {
                     name: f,
                     url: `/docs/${entry.name}/${f}`
                 }));
-            } else if (entry.isFile() && /\.(pdf|doc|docx)$/i.test(entry.name)) {
-                if (!result['uncategorized']) result['uncategorized'] = [];
-                result['uncategorized'].push({
-                    name: entry.name,
-                    url: `/docs/${entry.name}`
-                });
             }
         });
     } catch (err) {
@@ -40,33 +34,39 @@ app.get('/api/documents', (req, res) => {
     res.json(result);
 });
 
-// API: List all images in public/images, organized by subfolder
+// API: List all images in public/images
 app.get('/api/images', (req, res) => {
     const imgDir = path.join(__dirname, 'public', 'images');
-    const result = {};
+    const result = [];
 
     try {
-        const entries = fs.readdirSync(imgDir, { withFileTypes: true });
-        entries.forEach(entry => {
-            if (entry.isDirectory()) {
-                const catPath = path.join(imgDir, entry.name);
-                const files = fs.readdirSync(catPath).filter(f =>
-                    /\.(jpg|jpeg|png|gif|webp)$/i.test(f)
-                );
-                result[entry.name] = files.map(f => ({
-                    name: f,
-                    url: `/images/${entry.name}/${f}`
-                }));
-            } else if (entry.isFile() && /\.(jpg|jpeg|png|gif|webp)$/i.test(entry.name)) {
-                if (!result['uncategorized']) result['uncategorized'] = [];
-                result['uncategorized'].push({
-                    name: entry.name,
-                    url: `/images/${entry.name}`
-                });
-            }
+        const files = fs.readdirSync(imgDir).filter(f =>
+            /\.(jpg|jpeg|png|gif|webp)$/i.test(f)
+        );
+        files.forEach(f => {
+            result.push({ name: f, url: `/images/${f}` });
         });
     } catch (err) {
         return res.status(500).json({ error: 'Failed to read images directory' });
+    }
+
+    res.json(result);
+});
+
+// API: List all videos in public/videos
+app.get('/api/videos', (req, res) => {
+    const vidDir = path.join(__dirname, 'public', 'videos');
+    const result = [];
+
+    try {
+        const files = fs.readdirSync(vidDir).filter(f =>
+            /\.(mp4|mov|webm)$/i.test(f)
+        );
+        files.forEach(f => {
+            result.push({ name: f, url: `/videos/${f}` });
+        });
+    } catch (err) {
+        return res.status(500).json({ error: 'Failed to read videos directory' });
     }
 
     res.json(result);
