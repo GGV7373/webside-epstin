@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+    setupWarning();
     renderVideos();
     renderDocuments();
     renderImages();
@@ -8,6 +9,32 @@ document.addEventListener('DOMContentLoaded', function () {
     setupLightbox();
     setupPdfViewer();
 });
+
+// --- Content warning popup ---
+function setupWarning() {
+    var overlay = document.getElementById('warning-overlay');
+    var acceptBtn = document.getElementById('warning-accept');
+    var leaveBtn = document.getElementById('warning-leave');
+
+    if (!overlay) return;
+
+    if (sessionStorage.getItem('warning-accepted')) {
+        overlay.classList.add('dismissed');
+        return;
+    }
+
+    document.body.style.overflow = 'hidden';
+
+    acceptBtn.addEventListener('click', function () {
+        sessionStorage.setItem('warning-accepted', '1');
+        overlay.classList.add('dismissed');
+        document.body.style.overflow = '';
+    });
+
+    leaveBtn.addEventListener('click', function () {
+        window.location.href = 'about:blank';
+    });
+}
 
 // --- Render videos ---
 function renderVideos() {
