@@ -14,7 +14,7 @@ const SITE_DATA = {
         { filename: "EFTA01621057.mp4", id: "EFTA01621057" },
         { filename: "EFTA01621060.mp4", id: "EFTA01621060" },
         { filename: "EFTA01621062.mp4", id: "EFTA01621062" },
-        { filename: "EFTA01621067.mp4", id: "EFTA01621067" },
+        { filename: "EFTA01621067.mp4", id: "EFTA01621067"},
         { filename: "EFTA01621080.mp4", id: "EFTA01621080" },
         { filename: "EFTA01621084.mp4", id: "EFTA01621084" },
         { filename: "EFTA01621086.mp4", id: "EFTA01621086" },
@@ -93,6 +93,32 @@ const SITE_DATA = {
         // {
         //     title: "My note title",
         //     content: "What I noticed about this document..."
+        // },
+    ],
+
+    // ------ VIDEO NOTES ------
+    // Add notes for videos here. Each note has a videoId and content.
+    videoNotes: [
+        {
+            videoId: "EFTA00123083",
+            content: "This video shows the entrance to the facility at 10:23pm. Notice the security guard in the background."
+        },
+        {
+            videoId: "EFTA01621067",
+            content: "The legendary temple on Epstein's private island."
+        },
+        {
+            videoId: "EFTA01622052",
+            content: "Vidos from when Epstein was probebely in Sweaden. Notes the falg in the background."
+        },
+        {
+            videoId: "EFTA01648547",
+            content: "Video where it can be herd a woman beting a animal/child whit a basebalbat. It is also possible to herd a manely moan in the background."
+        }
+        // Example:
+        // {
+        //     videoId: "EFTA00123083",
+        //     content: "This video shows..."
         // },
     ]
 };

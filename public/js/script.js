@@ -4,11 +4,33 @@ document.addEventListener('DOMContentLoaded', function () {
     renderDocuments();
     renderImages();
     renderNotes();
+    renderVideoNotes();
     setupNavigation();
     setupScrollSpy();
     setupLightbox();
     setupPdfViewer();
 });
+// --- Render video notes ---
+function renderVideoNotes() {
+    var container = document.getElementById('video-notes-container');
+    if (!container || !SITE_DATA.videoNotes) return;
+
+    if (SITE_DATA.videoNotes.length === 0) {
+        container.innerHTML = '<p class="notes-empty">No video notes yet. Add video notes in data.js.</p>';
+        return;
+    }
+
+    SITE_DATA.videoNotes.forEach(function (note) {
+        var card = document.createElement('div');
+        card.className = 'note-card';
+
+        card.innerHTML =
+            '<h3 class="note-title">Video: ' + note.videoId + '</h3>' +
+            '<div class="note-content">' + note.content + '</div>';
+
+        container.appendChild(card);
+    });
+}
 
 // --- Content warning popup ---
 function setupWarning() {
@@ -62,6 +84,19 @@ function renderVideos() {
 
         card.appendChild(videoEl);
         card.appendChild(label);
+
+        // Add video note as a caption under the video
+        if (SITE_DATA.videoNotes && SITE_DATA.videoNotes.length > 0) {
+            SITE_DATA.videoNotes.forEach(function(note) {
+                if (note.videoId === video.id) {
+                    var caption = document.createElement('div');
+                    caption.className = 'gallery-caption'; // Use same class as image captions
+                    caption.textContent = note.content;
+                    card.appendChild(caption);
+                }
+            });
+        }
+
         container.appendChild(card);
     });
 }
