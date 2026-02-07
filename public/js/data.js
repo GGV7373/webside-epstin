@@ -25,7 +25,6 @@ const SITE_DATA = {
         { filename: "EFTA01648547.mp4", id: "EFTA01648547" },
         { filename: "EFTA01648622.mp4", id: "EFTA01648622" },
         { filename: "EFTA01648662.mp4", id: "EFTA01648662" },
-        { filename: "EFTA01683321.mp4", id: "EFTA01683321" },
     ],
 
     // ------ DOCUMENTS (PDFs) ------
