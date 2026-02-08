@@ -142,6 +142,116 @@
       "photo": "",
       "reason": "Mentioned in depositions as having been at Epstein's home.",
       "details": "Magician. No accusations of wrongdoing."
+    },
+    {
+      "id": "allen",
+      "name": "Woody Allen",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "90",
+      "status": "Named in Documents",
+      "photo": "",
+      "reason": "Regular guest at Epstein's townhouse post-2010. Photographs and emails released in 2025 show social ties.",
+      "details": "Filmmaker. Helped by Epstein with college admission for daughter. Denies knowledge of crimes."
+    },
+    {
+      "id": "diaz",
+      "name": "Cameron Diaz",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "53",
+      "status": "Named in Documents",
+      "photo": "",
+      "reason": "Mentioned by accuser as name-dropped by Epstein. No direct involvement.",
+      "details": "Actress. Denies any association with Epstein."
+    },
+    {
+      "id": "dicaprio",
+      "name": "Leonardo DiCaprio",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "51",
+      "status": "Named in Documents",
+      "photo": "",
+      "reason": "Mentioned in records as a contact. No evidence of meetings or involvement.",
+      "details": "Actor. No accusations of wrongdoing."
+    },
+    {
+      "id": "campbell",
+      "name": "Naomi Campbell",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "55",
+      "status": "Named in Documents",
+      "photo": "",
+      "reason": "Named in contact book and mentioned in files. Attended events.",
+      "details": "Model. Denies knowledge of Epstein's crimes."
+    },
+    {
+      "id": "jagger",
+      "name": "Mick Jagger",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "82",
+      "status": "Named in Documents",
+      "photo": "",
+      "reason": "Photographed with Epstein and mentioned in files.",
+      "details": "Musician. No suggestion of involvement in crimes."
+    },
+    {
+      "id": "tucker",
+      "name": "Chris Tucker",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "54",
+      "status": "Named in Documents",
+      "photo": "",
+      "reason": "Flew on Epstein's plane for humanitarian trip. Mentioned in documents.",
+      "details": "Actor. Denies knowledge of wrongdoing."
+    },
+    {
+      "id": "baldwin",
+      "name": "Alec Baldwin",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "67",
+      "status": "Named in Documents",
+      "photo": "",
+      "reason": "Listed in Epstein's contact book released in 2025.",
+      "details": "Actor. No accusations of involvement."
+    },
+    {
+      "id": "barak",
+      "name": "Ehud Barak",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "83",
+      "status": "Named in Documents",
+      "photo": "",
+      "reason": "Former Israeli PM mentioned in court documents and visited properties.",
+      "details": "Politician. Denies any wrongdoing."
+    },
+    {
+      "id": "lutnick",
+      "name": "Howard Lutnick",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "64",
+      "status": "Named in Documents",
+      "photo": "",
+      "reason": "Limited interactions mentioned in emails. No wrongdoing accused.",
+      "details": "Businessman. Photographed with Epstein."
+    },
+    {
+      "id": "summers",
+      "name": "Larry Summers",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "71",
+      "status": "Named in Documents",
+      "photo": "",
+      "reason": "Economist with correspondence and meetings post-conviction.",
+      "details": "Former Treasury Secretary. No accusations."
     }
   ],
   "evidence": [
@@ -204,6 +314,15 @@
     { "from": "epstein", "to": "musk", "weight": 1 },
     { "from": "epstein", "to": "loc-island", "weight": 4 },
     { "from": "epstein", "to": "loc-ny", "weight": 3 },
-    { "from": "kellen", "to": "loc-pb", "weight": 2 }
+    { "from": "kellen", "to": "loc-pb", "weight": 2 },
+    { "from": "epstein", "to": "allen", "weight": 1 },
+    { "from": "epstein", "to": "dicaprio", "weight": 1 },
+    { "from": "epstein", "to": "campbell", "weight": 1 },
+    { "from": "epstein", "to": "jagger", "weight": 1 },
+    { "from": "epstein", "to": "tucker", "weight": 1 },
+    { "from": "epstein", "to": "baldwin", "weight": 1 },
+    { "from": "epstein", "to": "barak", "weight": 1 },
+    { "from": "epstein", "to": "lutnick", "weight": 1 },
+    { "from": "epstein", "to": "summers", "weight": 1 }
   ]
 }
