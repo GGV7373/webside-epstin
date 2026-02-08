@@ -211,7 +211,7 @@ function renderBoard(container, data) {
   persons.forEach(function (p) {
     var isCenter = p.tier === 0;
     var w = isCenter ? 180 : 140;
-    var item = { id: p.id, type: 'polaroid', name: p.name, label: p.role, center: isCenter };
+    var item = { id: p.id, type: 'polaroid', name: p.name, label: p.role, center: isCenter, photo: p.photo };
     var itemEl = createItem(item);
     itemEl.style.width = w + 'px';
     itemEl.style.left = (p._x - w / 2) + 'px';
@@ -325,14 +325,15 @@ function renderBoard(container, data) {
 
   viewport.addEventListener('pointerdown', function (e) {
     active.push({ id: e.pointerId, x: e.clientX, y: e.clientY });
-    viewport.setPointerCapture(e.pointerId);
     if (active.length === 1 && !e.target.closest('.board-item')) {
       isPanning = true;
       startPan = { x: e.clientX, y: e.clientY, ox: offsetX, oy: offsetY };
+      viewport.setPointerCapture(e.pointerId);
     } else if (active.length === 2) {
       isPanning = false;
       pinchDist = pDist(active); pinchScale = scale;
       pinchOX = offsetX; pinchOY = offsetY;
+      viewport.setPointerCapture(e.pointerId);
     }
   });
 
@@ -432,6 +433,13 @@ function createItem(item) {
 function buildPolaroid(wrap, item) {
   var frame = el('div', 'polaroid-frame');
   var img = el('div', 'polaroid-image');
+  if (item.photo) {
+    img.classList.add('has-photo');
+    var imgEl = document.createElement('img');
+    imgEl.src = item.photo;
+    imgEl.alt = item.name || '';
+    img.appendChild(imgEl);
+  }
   var caption = el('div', 'polaroid-caption');
   caption.textContent = item.name || item.label;
   frame.append(img, caption);
@@ -525,7 +533,15 @@ function openPersonModal(modal, person, connectedNames) {
 
   /* Header: photo + name + role + status */
   var header = el('div', 'detail-header');
-  var photo = el('div', 'detail-photo'); photo.textContent = '?';
+  var photo = el('div', 'detail-photo');
+  if (person.photo) {
+    var photoImg = document.createElement('img');
+    photoImg.src = person.photo;
+    photoImg.alt = person.name || '';
+    photo.appendChild(photoImg);
+  } else {
+    photo.textContent = '?';
+  }
   var info = el('div', 'detail-info');
   var nameEl = el('div', 'detail-name'); nameEl.textContent = person.name || person.id;
   var roleEl = el('div', 'detail-role'); roleEl.textContent = person.role || '';

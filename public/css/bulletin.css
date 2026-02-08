@@ -163,6 +163,17 @@
   font-family: 'Permanent Marker', cursive;
 }
 
+.polaroid-image.has-photo::after {
+  display: none;
+}
+
+.polaroid-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .center-item .polaroid-image::after {
   font-size: 48px;
   color: rgba(200,30,30,0.15);
@@ -436,6 +447,14 @@
   color: rgba(255,255,255,0.1);
   border: 4px solid #f5f0e8;
   box-shadow: 1px 1px 6px rgba(0,0,0,0.35);
+  overflow: hidden;
+}
+
+.detail-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .detail-info {
