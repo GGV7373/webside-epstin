@@ -1,107 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="description" content="The Epstein Files - Documents, videos, and evidence archive.">
-    <meta name="theme-color" content="#0a0a0f">
-    <title>The Epstein Files</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="description" content="The Epstein Files - Documents, videos, and evidence archive.">
+        <meta name="theme-color" content="#0a0a0f">
+        <title>The Epstein Files</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
 
-    <!-- CONTENT WARNING POPUP -->
-    <div class="warning-overlay" id="warning-overlay">
-        <div class="warning-box">
-            <h2 class="warning-title">Content Warning</h2>
-            <p class="warning-text">This site contains sensitive material including court documents, legal filings, and video evidence related to the Epstein case. Some content may be disturbing or unsuitable for all audiences.</p>
-            <p class="warning-text">By continuing, you confirm that you are 18 or older and understand the nature of the content.</p>
-            <div class="warning-actions">
-                <button class="warning-btn warning-btn-enter" id="warning-accept">I understand, continue</button>
-                <button class="warning-btn warning-btn-leave" id="warning-leave">Leave</button>
+        <!-- CONTENT WARNING POPUP -->
+        <div class="warning-overlay" id="warning-overlay">
+            <div class="warning-box">
+                <h2 class="warning-title">Content Warning</h2>
+                <p class="warning-text">This site contains sensitive material including court documents, legal filings, and video evidence related to the Epstein case. Some content may be disturbing or unsuitable for all audiences.</p>
+                <p class="warning-text">By continuing, you confirm that you are 18 or older and understand the nature of the content.</p>
+                <div class="warning-actions">
+                    <button class="warning-btn warning-btn-enter" id="warning-accept">I understand, continue</button>
+                    <button class="warning-btn warning-btn-leave" id="warning-leave">Leave</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- STICKY NAVIGATION -->
-    <nav id="main-nav" class="navbar">
-        <div class="nav-container">
-            <a href="#top" class="nav-brand">The Epstein Files</a>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-                <span class="hamburger"></span>
-            </button>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#videos" class="nav-link">Videos</a></li>
-                <li><a href="#documents" class="nav-link">Documents</a></li>
-                <li><a href="#images" class="nav-link">Images</a></li>
-                <li><a href="#notes" class="nav-link">Notes</a></li>
-            </ul>
+        <!-- STICKY NAVIGATION -->
+        <nav id="main-nav" class="navbar">
+            <div class="nav-container">
+                <a href="#top" class="nav-brand">The Epstein Files</a>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#videos" class="nav-link">Videos</a></li>
+                    <li><a href="#documents" class="nav-link">Documents</a></li>
+                    <li><a href="#images" class="nav-link">Images</a></li>
+                    <li><a href="#notes" class="nav-link">Notes</a></li>
+                    <li><a href="buletingbord.html" class="nav-link">Bulletin Board</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main>
+            <!-- VIDEOS SECTION -->
+            <section id="videos" class="section">
+                <div class="section-container">
+                    <h2 class="section-title">Videos</h2>
+                    <div class="media-grid" id="videos-container"></div>
+                </div>
+            </section>
+
+            <!-- DOCUMENTS SECTION -->
+            <section id="documents" class="section section-alt">
+                <div class="section-container">
+                    <h2 class="section-title">Documents</h2>
+                    <div class="docs-list" id="docs-container"></div>
+                </div>
+            </section>
+
+            <!-- IMAGES SECTION -->
+            <section id="images" class="section">
+                <div class="section-container">
+                    <h2 class="section-title">Images</h2>
+                    <div class="gallery-grid" id="gallery-container"></div>
+                </div>
+            </section>
+
+            <!-- NOTES SECTION -->
+            <section id="notes" class="section section-alt">
+                <div class="section-container">
+                    <h2 class="section-title">Notes</h2>
+                    <div class="notes-list" id="notes-container"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-container">
+                <p>For informational and educational purposes only.</p>
+            </div>
+        </footer>
+
+        <!-- LIGHTBOX OVERLAY -->
+        <div class="lightbox" id="lightbox">
+            <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+            <img class="lightbox-img" id="lightbox-img" src="" alt="">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
         </div>
-    </nav>
 
-    <main>
-        <!-- VIDEOS SECTION -->
-        <section id="videos" class="section">
-            <div class="section-container">
-                <h2 class="section-title">Videos</h2>
-                <div class="media-grid" id="videos-container"></div>
+        <!-- PDF VIEWER OVERLAY -->
+        <div class="pdf-viewer" id="pdf-viewer">
+            <div class="pdf-header">
+                <span class="pdf-title" id="pdf-title"></span>
+                <div class="pdf-actions">
+                    <button class="pdf-open-tab" id="pdf-open-tab" aria-label="Open in new tab">Open in tab</button>
+                    <button class="pdf-close" id="pdf-close" aria-label="Close">&times;</button>
+                </div>
             </div>
-        </section>
-
-        <!-- DOCUMENTS SECTION -->
-        <section id="documents" class="section section-alt">
-            <div class="section-container">
-                <h2 class="section-title">Documents</h2>
-                <div class="docs-list" id="docs-container"></div>
-            </div>
-        </section>
-
-        <!-- IMAGES SECTION -->
-        <section id="images" class="section">
-            <div class="section-container">
-                <h2 class="section-title">Images</h2>
-                <div class="gallery-grid" id="gallery-container"></div>
-            </div>
-        </section>
-
-        <!-- NOTES SECTION -->
-        <section id="notes" class="section section-alt">
-            <div class="section-container">
-                <h2 class="section-title">Notes</h2>
-                <div class="notes-list" id="notes-container"></div>
-            </div>
-        </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer-container">
-            <p>For informational and educational purposes only.</p>
+            <iframe class="pdf-frame" id="pdf-frame" src="" title="PDF document"></iframe>
         </div>
-    </footer>
 
-    <!-- LIGHTBOX OVERLAY -->
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
-        <img class="lightbox-img" id="lightbox-img" src="" alt="">
-        <p class="lightbox-caption" id="lightbox-caption"></p>
-    </div>
-
-    <!-- PDF VIEWER OVERLAY -->
-    <div class="pdf-viewer" id="pdf-viewer">
-        <div class="pdf-header">
-            <span class="pdf-title" id="pdf-title"></span>
-            <div class="pdf-actions">
-                <button class="pdf-open-tab" id="pdf-open-tab" aria-label="Open in new tab">Open in tab</button>
-                <button class="pdf-close" id="pdf-close" aria-label="Close">&times;</button>
-            </div>
-        </div>
-        <iframe class="pdf-frame" id="pdf-frame" src="" title="PDF document"></iframe>
-    </div>
-
-    <script src="js/data.js"></script>
-    <script src="js/script.js"></script>
-</body>
+        <script src="js/data.js"></script>
+        <script src="js/script.js"></script>
+    </body>
 </html>
