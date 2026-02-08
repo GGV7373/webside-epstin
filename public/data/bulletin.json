@@ -7,7 +7,7 @@
       "tier": 0,
       "age": "Deceased (66)",
       "status": "Deceased",
-      "photo": "",
+      "photo": "images/persons/epstin.jpg",
       "reason": "Central figure in sex trafficking investigation. Convicted in 2008 on state charges, arrested in 2019 on federal charges.",
       "details": "Financier and convicted sex offender. Operated a network involving properties in New York, Palm Beach, New Mexico, and the US Virgin Islands. Died by suicide in jail in August 2019 while awaiting trial."
     },
@@ -18,7 +18,7 @@
       "tier": 1,
       "age": "64",
       "status": "Convicted and Imprisoned",
-      "photo": "",
+      "photo": "images/persons/maxwell.jpg",
       "reason": "Recruited and groomed underage victims for Epstein. Convicted in 2021 on five federal charges including sex trafficking of a minor.",
       "details": "Longtime associate of Epstein. Sentenced to 20 years in prison in 2022. Currently serving sentence in federal prison."
     },
@@ -29,7 +29,7 @@
       "tier": 1,
       "age": "Deceased (74)",
       "status": "Deceased",
-      "photo": "",
+      "photo": "images/persons/Jean-Luc_Brunel.jpg",
       "reason": "Modeling agent accused of supplying girls to Epstein. Named in documents and flight logs.",
       "details": "French modeling scout charged with rape in France. Died by suicide in jail in 2022 while awaiting trial."
     },
@@ -62,7 +62,7 @@
       "tier": 2,
       "age": "65",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/prince-andrew.jpg",
       "reason": "Accused of sexual assault by Virginia Giuffre. Settled civil suit in 2022. Multiple visits to Epstein properties.",
       "details": "Former Duke of York. Stripped of royal titles in 2022. Denies wrongdoing."
     },
@@ -73,7 +73,7 @@
       "tier": 2,
       "age": "79",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/bill_clinton.jpg",
       "reason": "Flew on Epstein's plane multiple times. Mentioned in depositions and emails.",
       "details": "Former US President. Traveled with Epstein for humanitarian work. Denies knowledge of crimes."
     },
@@ -84,7 +84,7 @@
       "tier": 2,
       "age": "79",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/donald_trump.jpg",
       "reason": "Socialized with Epstein in the 1990s-2000s. Flew on plane several times. Mentioned in files.",
       "details": "Former US President. Publicly distanced himself after 2008 conviction. Denies wrongdoing."
     },
@@ -95,7 +95,7 @@
       "tier": 2,
       "age": "87",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/alan_dershowitz.jpg",
       "reason": "Epstein's lawyer in 2008 plea deal. Accused by Giuffre of abuse (later retracted).",
       "details": "Harvard law professor. Settled civil suits. Denies all allegations."
     },
@@ -106,7 +106,7 @@
       "tier": 2,
       "age": "70",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/bill_gates.jpg",
       "reason": "Met with Epstein multiple times post-conviction for philanthropy discussions.",
       "details": "Microsoft co-founder. Regrets association. No accusations of wrongdoing."
     },
@@ -117,7 +117,7 @@
       "tier": 3,
       "age": "54",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/elon_musk.jpg",
       "reason": "Email correspondence about travel. Denies visiting island.",
       "details": "Tesla and SpaceX CEO. Mentioned in files but denies close ties."
     },
@@ -128,7 +128,7 @@
       "tier": 3,
       "age": "Deceased (50)",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/michael_jackson.jpg",
       "reason": "Visited Epstein's Palm Beach home according to testimony.",
       "details": "Pop star. No accusations of wrongdoing in Epstein case. Died in 2009."
     },
@@ -139,7 +139,7 @@
       "tier": 3,
       "age": "69",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/david_copperfield.jpg",
       "reason": "Mentioned in depositions as having been at Epstein's home.",
       "details": "Magician. No accusations of wrongdoing."
     },
@@ -150,7 +150,7 @@
       "tier": 3,
       "age": "90",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/woody_allen.jpg",
       "reason": "Regular guest at Epstein's townhouse post-2010. Photographs and emails released in 2025 show social ties.",
       "details": "Filmmaker. Helped by Epstein with college admission for daughter. Denies knowledge of crimes."
     },
@@ -161,7 +161,7 @@
       "tier": 3,
       "age": "53",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/cameron_diaz.jpg",
       "reason": "Mentioned by accuser as name-dropped by Epstein. No direct involvement.",
       "details": "Actress. Denies any association with Epstein."
     },
@@ -172,7 +172,7 @@
       "tier": 3,
       "age": "51",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/leonardo_diCaprio.png",
       "reason": "Mentioned in records as a contact. No evidence of meetings or involvement.",
       "details": "Actor. No accusations of wrongdoing."
     },
@@ -183,7 +183,7 @@
       "tier": 3,
       "age": "55",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/naomi_campbell.jpg",
       "reason": "Named in contact book and mentioned in files. Attended events.",
       "details": "Model. Denies knowledge of Epstein's crimes."
     },
@@ -194,7 +194,7 @@
       "tier": 3,
       "age": "82",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/mick_jagger.jpg",
       "reason": "Photographed with Epstein and mentioned in files.",
       "details": "Musician. No suggestion of involvement in crimes."
     },
@@ -205,7 +205,7 @@
       "tier": 3,
       "age": "54",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/chris_tucker.jpg",
       "reason": "Flew on Epstein's plane for humanitarian trip. Mentioned in documents.",
       "details": "Actor. Denies knowledge of wrongdoing."
     },
@@ -216,7 +216,7 @@
       "tier": 3,
       "age": "67",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/alec_baldwin.jpg",
       "reason": "Listed in Epstein's contact book released in 2025.",
       "details": "Actor. No accusations of involvement."
     },
@@ -227,7 +227,7 @@
       "tier": 3,
       "age": "83",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/ehud_barak.webp",
       "reason": "Former Israeli PM mentioned in court documents and visited properties.",
       "details": "Politician. Denies any wrongdoing."
     },
@@ -238,7 +238,7 @@
       "tier": 3,
       "age": "64",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/howard_lutnick.jpg",
       "reason": "Limited interactions mentioned in emails. No wrongdoing accused.",
       "details": "Businessman. Photographed with Epstein."
     },
@@ -249,7 +249,7 @@
       "tier": 3,
       "age": "71",
       "status": "Named in Documents",
-      "photo": "",
+      "photo": "images/persons/larry_summers.jpg",
       "reason": "Economist with correspondence and meetings post-conviction.",
       "details": "Former Treasury Secretary. No accusations."
     }
