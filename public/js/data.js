@@ -87,26 +87,83 @@ const SITE_DATA = {
             category: "emails",
             persons: ["Jeffrey Epstein", "Elon Musk"],
         },
-        { title: "EFTA00024813", filename: "EFTA00024813.pdf", url: "docs/court-documents/EFTA00024813.pdf" },
-        { title: "EFTA00072617", filename: "EFTA00072617.pdf", url: "docs/court-documents/EFTA00072617.pdf" },
-        { title: "EFTA00086877", filename: "EFTA00086877.pdf", url: "docs/court-documents/EFTA00086877.pdf" },
-        { title: "EFTA00144401", filename: "EFTA00144401.pdf", url: "docs/court-documents/EFTA00144401.pdf" },
-        { title: "EFTA00175117", filename: "EFTA00175117.pdf", url: "docs/court-documents/EFTA00175117.pdf" },
-        { title: "EFTA00256291", filename: "EFTA00256291.pdf", url: "docs/court-documents/EFTA00256291.pdf" },
-        { title: "EFTA00527356", filename: "EFTA00527356.pdf", url: "docs/court-documents/EFTA00527356.pdf" },
-        { title: "EFTA00763787", filename: "EFTA00763787.pdf", url: "docs/court-documents/EFTA00763787.pdf" },
-        { title: "EFTA00971523", filename: "EFTA00971523.pdf", url: "docs/court-documents/EFTA00971523.pdf" },
-        { title: "EFTA01205723", filename: "EFTA01205723.pdf", url: "docs/court-documents/EFTA01205723.pdf" },
-        { title: "EFTA01250248", filename: "EFTA01250248.pdf", url: "docs/court-documents/EFTA01250248.pdf" },
-        { title: "EFTA01660651", filename: "EFTA01660651.pdf", url: "docs/court-documents/EFTA01660651.pdf" },
-        { title: "EFTA01897628", filename: "EFTA01897628.pdf", url: "docs/court-documents/EFTA01897628.pdf" },
-        { title: "EFTA01965061", filename: "EFTA01965061.pdf", url: "docs/court-documents/EFTA01965061.pdf" },
-        { title: "EFTA01995685", filename: "EFTA01995685.pdf", url: "docs/court-documents/EFTA01995685.pdf" },
-        { title: "EFTA02032723", filename: "EFTA02032723.pdf", url: "docs/court-documents/EFTA02032723.pdf" },
-        { title: "EFTA02215818", filename: "EFTA02215818.pdf", url: "docs/court-documents/EFTA02215818.pdf" },
-        { title: "EFTA02404867", filename: "EFTA02404867.pdf", url: "docs/court-documents/EFTA02404867.pdf" },
-        { title: "EFTA02416106", filename: "EFTA02416106.pdf", url: "docs/court-documents/EFTA02416106.pdf" },
-        { title: "EFTA02588450", filename: "EFTA02588450.pdf", url: "docs/court-documents/EFTA02588450.pdf" },
+
+        {
+            displayName: "Crime coverups",
+            filename: "EFTA00072617.pdf",
+            url: "docs/court-documents/EFTA00072617.pdf",
+            category: "emails",
+        },
+        {
+            displayName: "Epstein sex slaves",
+            filename: "EFTA00086877.pdf",
+            url: "docs/court-documents/EFTA00086877.pdf",
+            category: "court-docs",
+            persons: ["Jeffery Epstein"]
+        },
+        {
+            displayName: "Congress on Epstein",
+            filename: "EFTA00175117.pdf",
+            url: "docs/court-documents/EFTA00175117.pdf",
+            category: "court-docs",
+            persons: ["Jeffery Epstein"]
+        },
+        {
+            displayName: "Israeli operation in dubai",
+            filename: "EFTA00763787.pdf",
+            url: "docs/court-documents/EFTA00763787.pdf",
+            category: "emails",
+            persons: ["Sultan Bin Sulayem, Jeffery Epstein"]
+        },
+        {
+            displayName: "Beef jerky",
+            filename: "EFTA00971523.pdf",
+            url: "docs/court-documents/EFTA00971523.pdf",
+            category: "emails",
+            persons: ["Jeffery Epstein", "Eva unknown"]
+        },
+        {
+            displayName: "Libyan dealings",
+            filename: "EFTA01205723.pdf",
+            url: "docs/court-documents/EFTA01205723.pdf",
+            category: "emails",
+            persons: ["Jeffery Epstein"]
+        },
+        {
+            displayName: "Young woman, flight academy",
+            filename: "EFTA01250248.pdf",
+            url: "docs/court-documents/EFTA01250248.pdf",
+            category: "emails",
+            persons: ["Ghislaine Maxwell", "Jeffery Epstein", "Mark Iverson", "Bill Richardson"]
+        },
+        {
+            displayName: "Palestinian media watch subscription letter",
+            filename: "EFTA01897628.pdf",
+            url: "docs/court-documents/EFTA01897628.pdf",
+            category: "emails",
+            persons: ["Palestinian Media Watch", "Jeffery Epstein"]
+        },
+        {
+            displayName: "Naugthy french lessons",
+            filename: "EFTA01965061.pdf",
+            url: "docs/court-documents/EFTA01965061.pdf",
+            category: "emails",
+            persons: ["Jeffery Epstein"]
+        },
+        {
+            displayName: "EFTA01995685",
+            filename: "EFTA01995685.pdf",
+            url: "docs/court-documents/EFTA01995685.pdf",
+            category: "court-docs",
+            persons: ["Anat Barak", "Jeffery Epstein", "Tali"]
+        },
+        {
+            displayName: "Mossad operations inside iran",
+            filename: "EFTA02404867.pdf",
+            url: "docs/court-documents/EFTA02404867.pdf",
+            category: "emails",
+            persons: ["Terje Rod-Larsen", "Nicholas Noe"]
+        },
         {
             displayName: "Trump lawsuit about rape, sex trafficking, and abuse",
             filename: "Johnson_TrumpEpstein_Lawsuit.pdf",
