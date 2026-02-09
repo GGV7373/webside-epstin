@@ -1,0 +1,734 @@
+/* ===========================================
+   Detective Investigation Bulletin Board
+   =========================================== */
+
+/* --- Board Container --- */
+.bulletin-board {
+  width: 100%;
+  height: calc(100vh - 80px);
+  background: #1a1410;
+  position: relative;
+  overflow: hidden;
+}
+
+.board-viewport {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: grab;
+  position: relative;
+  touch-action: none;
+}
+
+.board-viewport:active {
+  cursor: grabbing;
+}
+
+/* --- Cork Board Surface --- */
+.board-surface {
+  position: relative;
+  background-color: #b8874b;
+  background-image:
+    radial-gradient(ellipse at 15% 25%, rgba(160,110,50,0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 65%, rgba(180,140,80,0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 55% 15%, rgba(140,90,30,0.25) 0%, transparent 45%),
+    radial-gradient(ellipse at 35% 80%, rgba(170,120,60,0.3) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 20%, rgba(150,100,35,0.2) 0%, transparent 40%),
+    radial-gradient(ellipse at 10% 70%, rgba(185,140,70,0.2) 0%, transparent 45%);
+  border: 14px solid #4a2d15;
+  box-shadow:
+    inset 0 0 60px rgba(0,0,0,0.35),
+    inset 0 0 15px rgba(0,0,0,0.15);
+  transform-origin: 0 0;
+}
+
+/* Cork grain overlay */
+.board-surface::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle 0.8px at 8px 6px, rgba(0,0,0,0.07) 0.8px, transparent 0),
+    radial-gradient(circle 0.5px at 22px 18px, rgba(0,0,0,0.05) 0.5px, transparent 0),
+    radial-gradient(circle 0.6px at 14px 28px, rgba(255,255,255,0.04) 0.6px, transparent 0),
+    radial-gradient(circle 0.7px at 30px 10px, rgba(0,0,0,0.06) 0.7px, transparent 0),
+    radial-gradient(circle 0.4px at 4px 22px, rgba(0,0,0,0.04) 0.4px, transparent 0),
+    radial-gradient(circle 0.9px at 26px 4px, rgba(0,0,0,0.05) 0.9px, transparent 0);
+  background-size: 35px 32px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- Vignette / Moody Lighting --- */
+.board-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 45%,
+    transparent 30%,
+    rgba(0,0,0,0.15) 60%,
+    rgba(0,0,0,0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* --- SVG Yarn Layer --- */
+.yarn-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.yarn-thread {
+  fill: none;
+  stroke-linecap: round;
+}
+
+/* --- Board Items (Common) --- */
+.board-item {
+  position: absolute;
+  z-index: 10;
+  cursor: pointer;
+  transform-origin: center top;
+  transition: filter 0.15s ease;
+}
+
+.board-item:hover {
+  z-index: 20;
+  filter: brightness(1.08);
+}
+
+/* --- Thumbtack --- */
+.thumbtack {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  z-index: 15;
+  box-shadow:
+    0 1px 3px rgba(0,0,0,0.5),
+    inset 0 -2px 3px rgba(0,0,0,0.3),
+    inset 0 1px 2px rgba(255,255,255,0.3);
+}
+
+.thumbtack.red   { background: radial-gradient(circle at 35% 35%, #ff4444, #aa1111); }
+.thumbtack.blue  { background: radial-gradient(circle at 35% 35%, #4488ff, #1144aa); }
+.thumbtack.yellow{ background: radial-gradient(circle at 35% 35%, #ffcc44, #cc9900); }
+.thumbtack.green { background: radial-gradient(circle at 35% 35%, #44cc66, #228833); }
+.thumbtack.white { background: radial-gradient(circle at 35% 35%, #ffffff, #bbbbbb); }
+
+/* --- Polaroid Cards (Suspects) --- */
+.item-polaroid { width: 140px; }
+.item-polaroid.center-item { width: 180px; }
+
+.polaroid-frame {
+  background: #f5f0e8;
+  padding: 8px 8px 30px 8px;
+  box-shadow:
+    2px 3px 12px rgba(0,0,0,0.4),
+    0 1px 3px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.center-item .polaroid-frame {
+  padding: 10px 10px 38px 10px;
+  box-shadow:
+    3px 4px 16px rgba(0,0,0,0.5),
+    0 0 20px rgba(180,0,0,0.15);
+}
+
+.polaroid-image {
+  width: 100%;
+  aspect-ratio: 1 / 0.85;
+  background: #2a2a2e;
+  position: relative;
+  overflow: hidden;
+}
+
+.polaroid-image::after {
+  content: '?';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: rgba(255,255,255,0.08);
+  font-family: 'Permanent Marker', cursive;
+}
+
+.polaroid-image.has-photo::after {
+  display: none;
+}
+
+.polaroid-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.center-item .polaroid-image::after {
+  font-size: 48px;
+  color: rgba(200,30,30,0.15);
+}
+
+.polaroid-caption {
+  position: absolute;
+  bottom: 5px;
+  left: 8px;
+  right: 8px;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 12px;
+  color: #222;
+  text-align: center;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.center-item .polaroid-caption {
+  font-size: 14px;
+  bottom: 8px;
+  color: #8b0000;
+}
+
+.polaroid-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 9px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.center-item .polaroid-label {
+  font-size: 10px;
+  color: #8b0000;
+  font-weight: bold;
+}
+
+/* Center suspect red marker ring */
+.center-marker {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  right: -12px;
+  bottom: -12px;
+  border: 3px solid rgba(200,30,30,0.55);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* --- Sticky Notes --- */
+.item-note { width: 160px; }
+
+.note-paper {
+  background: linear-gradient(135deg, #fef9b0 0%, #fef3a0 50%, #f5e87a 100%);
+  padding: 22px 12px 12px 12px;
+  min-height: 80px;
+  box-shadow:
+    2px 3px 10px rgba(0,0,0,0.35),
+    inset 0 -2px 6px rgba(0,0,0,0.05);
+  position: relative;
+}
+
+/* Folded corner */
+.note-paper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #fef3a0 50%, rgba(0,0,0,0.08) 50%, #e8d86e 51%);
+}
+
+.note-label {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 10px;
+  color: #8b0000;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(139,0,0,0.2);
+  padding-bottom: 3px;
+}
+
+.note-text {
+  font-family: 'Caveat', cursive;
+  font-size: 15px;
+  color: #333;
+  line-height: 1.35;
+}
+
+/* --- Document Cards --- */
+.item-document { width: 170px; }
+
+.doc-paper {
+  background: linear-gradient(to bottom, #faf8f2 0%, #f0ece0 100%);
+  padding: 14px 10px 10px 10px;
+  min-height: 90px;
+  box-shadow:
+    2px 3px 10px rgba(0,0,0,0.35),
+    0 1px 2px rgba(0,0,0,0.15);
+  position: relative;
+  border-left: 3px solid #444;
+}
+
+.doc-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 9px;
+  color: #8b0000;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.doc-title {
+  font-family: 'Special Elite', monospace;
+  font-size: 12px;
+  color: #222;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.doc-notes {
+  font-family: 'Caveat', cursive;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.3;
+  font-style: italic;
+}
+
+/* EVIDENCE stamp */
+.doc-stamp {
+  position: absolute;
+  bottom: 8px;
+  right: 6px;
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  color: rgba(139,0,0,0.25);
+  transform: rotate(-8deg);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 1.5px solid rgba(139,0,0,0.2);
+  padding: 1px 4px;
+}
+
+/* --- Evidence Tags --- */
+.item-tag { width: 130px; }
+
+.tag-card {
+  background: #e8dcc8;
+  padding: 8px 10px 8px 20px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+  position: relative;
+  min-height: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* String hole */
+.tag-card::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1.5px solid #888;
+  background: transparent;
+}
+
+.tag-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 8px;
+  color: #8b0000;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+.tag-name {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  color: #333;
+}
+
+/* --- Cluster / Ring Labels --- */
+.ring-label {
+  position: absolute;
+  font-family: 'Special Elite', monospace;
+  font-size: 13px;
+  color: rgba(255,255,255,0.13);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  pointer-events: none;
+  z-index: 2;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+/* ===========================================
+   Person Detail Modal (Case File)
+   =========================================== */
+
+.bb-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.82);
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.bb-modal.open { display: flex; }
+
+.bb-modal .modal-inner {
+  background: #f5f0e8;
+  width: min(92vw, 520px);
+  max-height: min(85vh, 680px);
+  border-radius: 4px;
+  overflow: auto;
+  padding: 24px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.bb-modal .modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #888;
+  line-height: 1;
+  z-index: 5;
+}
+
+.bb-modal .modal-close:hover { color: #333; }
+
+/* --- Detail Header --- */
+.detail-header {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.detail-photo {
+  width: 80px;
+  height: 100px;
+  background: #2a2a2e;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 28px;
+  color: rgba(255,255,255,0.1);
+  border: 4px solid #f5f0e8;
+  box-shadow: 1px 1px 6px rgba(0,0,0,0.35);
+  overflow: hidden;
+}
+
+.detail-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.detail-name {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 22px;
+  color: #222;
+  margin-bottom: 4px;
+  line-height: 1.1;
+}
+
+.detail-role {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  color: #8b0000;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.detail-status {
+  display: inline-block;
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 2px;
+  align-self: flex-start;
+}
+
+.detail-status.status-convicted    { background: rgba(180,30,30,0.15); color: #8b0000; border: 1px solid rgba(180,30,30,0.25); }
+.detail-status.status-deceased     { background: rgba(0,0,0,0.08); color: #555; border: 1px solid rgba(0,0,0,0.15); }
+.detail-status.status-investigation{ background: rgba(200,150,0,0.15); color: #8a6d00; border: 1px solid rgba(200,150,0,0.25); }
+.detail-status.status-named        { background: rgba(50,100,180,0.1); color: #2a5090; border: 1px solid rgba(50,100,180,0.2); }
+
+/* --- Detail Fields Grid --- */
+.detail-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.detail-field .field-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 9px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 1px;
+}
+
+.detail-field .field-value {
+  font-family: 'Caveat', cursive;
+  font-size: 16px;
+  color: #333;
+  display: block;
+}
+
+/* --- Section Titles --- */
+.detail-section {
+  margin-bottom: 14px;
+}
+
+.detail-section-title {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  color: #8b0000;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid rgba(139,0,0,0.15);
+  padding-bottom: 3px;
+}
+
+.detail-section-text {
+  font-family: 'Caveat', cursive;
+  font-size: 16px;
+  color: #444;
+  line-height: 1.45;
+}
+
+/* --- Connections Tags --- */
+.detail-connections {
+  margin-top: 14px;
+}
+
+.conn-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.conn-tag {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  padding: 3px 10px;
+  background: rgba(200,30,30,0.08);
+  border: 1px solid rgba(200,30,30,0.2);
+  color: #8b0000;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+/* --- Linked Document List --- */
+.detail-doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.detail-doc-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Special Elite', monospace;
+  font-size: 12px;
+  padding: 8px 12px;
+  background: rgba(50,100,180,0.08);
+  border: 1px solid rgba(50,100,180,0.2);
+  color: #2a5090;
+  border-radius: 3px;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.detail-doc-link::before {
+  content: 'PDF';
+  font-size: 9px;
+  font-weight: bold;
+  padding: 2px 5px;
+  background: rgba(50,100,180,0.15);
+  border: 1px solid rgba(50,100,180,0.3);
+  border-radius: 2px;
+  color: #2a5090;
+  flex-shrink: 0;
+}
+
+.detail-doc-link:active {
+  background: rgba(50,100,180,0.15);
+}
+
+/* --- Evidence Modal (simpler) --- */
+.evidence-detail .detail-section-text {
+  font-size: 15px;
+}
+
+.bb-media {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  margin-top: 10px;
+}
+
+.bb-media img, .bb-media video, .bb-media iframe {
+  max-width: 100%;
+  max-height: 50vh;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* --- Zoom Controls --- */
+.board-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 60;
+}
+
+.board-controls button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.board-controls button:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .bulletin-board {
+    height: calc(100vh - 50px);
+  }
+
+  .bb-modal .modal-inner {
+    width: 95vw;
+    max-height: 90vh;
+    padding: 16px;
+  }
+
+  .detail-header {
+    gap: 12px;
+  }
+
+  .detail-photo {
+    width: 60px;
+    height: 75px;
+    font-size: 22px;
+  }
+
+  .detail-name {
+    font-size: 18px;
+  }
+
+  .detail-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .board-controls {
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .board-controls button {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .modal-close {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    top: 8px;
+    right: 8px;
+  }
+
+  .detail-doc-link {
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+
+  .conn-tag {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+}
+
+/* iPhone safe areas for bulletin board */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .bulletin-board {
+    height: calc(100vh - var(--nav-height, 56px) - env(safe-area-inset-top));
+  }
+
+  .board-controls {
+    bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+}
