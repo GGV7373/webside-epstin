@@ -135,19 +135,19 @@ const SITE_DATA = {
     videoNotes: [
         {
             videoId: "EFTA00123083",
-            content: "This video shows the entrance to the facility at 10:23pm. Notice the security guard in the background."
+            content: "This video shows the entrance to the facility at 10:23pm. Notice the security guard in the background. <a href=\"../videos.html\">See all videos</a>"
         },
         {
             videoId: "EFTA01621067",
-            content: "The legendary temple on Epstein's private island."
+            content: "The legendary temple on Epstein's private island. <a href=\"../images/evidence/temple.jpg\">View temple image</a>"
         },
         {
             videoId: "EFTA01622052",
-            content: "Vidos from when Epstein was probebely in Sweaden. Notes the falg in the background."
+            content: "Video likely from when Epstein was probably in Sweden. Note the flag in the background. <a href=\"../index.html#documents\">Related documents</a>"
         },
         {
             videoId: "EFTA01648547",
-            content: "Video where it can be herd a woman beting a animal/child whit a basebalbat. It is also possible to herd a manely moan in the background."
+            content: "Video where a woman can be heard beating an animal or child with a baseball bat. It is also possible to hear a male moan in the background. <a href=\"../buletingbord.html\">Discuss on Bulletin Board</a>"
         }
         // Example:
         // {

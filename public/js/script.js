@@ -340,6 +340,25 @@ function setupNavigation() {
             });
         }
     }
+
+    // Auto-set active nav link based on current file path
+    try {
+        var path = window.location.pathname.split('/').pop();
+        if (!path) path = 'index.html';
+        var allNavLinks = document.querySelectorAll('.nav-link');
+        for (var j = 0; j < allNavLinks.length; j++) {
+            var href = allNavLinks[j].getAttribute('href');
+            // Normalize href (ignore query/hash)
+            var hrefFile = href.split('?')[0].split('#')[0];
+            if (hrefFile === path || (hrefFile === 'index.html' && path === 'index.html')) {
+                allNavLinks[j].classList.add('active');
+            } else {
+                allNavLinks[j].classList.remove('active');
+            }
+        }
+    } catch (e) {
+        // Silent fail — navigation still works without JS support for active state
+    }
 }
 
 // --- Scroll spy: highlight active nav link ---
