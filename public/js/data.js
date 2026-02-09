@@ -123,6 +123,11 @@ const SITE_DATA = {
             alt: "EFTA00000466",
             caption: "EFTA00000466",
         },
+        {
+            src: "images/piglet.png",
+            alt: "EFTA00000467",
+            caption: "Piglet in the files?", 
+        },
     ],
 
     // ------ NOTES ------

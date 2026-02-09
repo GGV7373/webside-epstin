@@ -265,6 +265,17 @@
       "photo": "images/persons/larry_summers.jpg",
       "reason": "Economist with correspondence and meetings post-conviction.",
       "details": "Former Treasury Secretary. No accusations."
+    },
+    {
+      "id": "piglet",
+      "name": "Piglet",
+      "role": "Unidentified Contact",
+      "tier": 3,
+      "age": "Unknown",
+      "status": "Unidentified",
+      "photo": "images/piglet.png",
+      "reason": "Fund in the relist pictured in files. No known identity or connection.",
+      "details": "No further information available."
     }
   ],
   "evidence": [
@@ -319,12 +330,13 @@
     { "from": "maxwell", "to": "epstein", "weight": 5 },
     { "from": "maxwell", "to": "brunel", "weight": 3 },
     { "from": "maxwell", "to": "kellen", "weight": 4 },
+    { "from": "maxwell", "to": "marcinkova", "weight": 3 },
     { "from": "epstein", "to": "andrew", "weight": 3 },
     { "from": "epstein", "to": "clinton", "weight": 2 },
     { "from": "epstein", "to": "trump", "weight": 2 },
     { "from": "epstein", "to": "dershowitz", "weight": 3 },
-    { "from": "epstein", "to": "gates", "weight": 2 },
-    { "from": "epstein", "to": "musk", "weight": 1 },
+    { "from": "epstein", "to": "gates", "weight": 3 },
+    { "from": "epstein", "to": "musk", "weight": 2 },
     { "from": "epstein", "to": "loc-island", "weight": 4 },
     { "from": "epstein", "to": "loc-ny", "weight": 3 },
     { "from": "kellen", "to": "loc-pb", "weight": 2 },
@@ -336,6 +348,12 @@
     { "from": "epstein", "to": "baldwin", "weight": 1 },
     { "from": "epstein", "to": "barak", "weight": 1 },
     { "from": "epstein", "to": "lutnick", "weight": 1 },
-    { "from": "epstein", "to": "summers", "weight": 1 }
+    { "from": "epstein", "to": "summers", "weight": 1 },
+    { "from": "epstein", "to": "piglet", "weight": 1 },
+    { "from": "trump", "to": "clinton", "weight": 2 },
+    { "from": "trump", "to": "andrew", "weight": 2 },
+    { "from": "trump", "to": "musk", "weight": 4 },
+    { "from": "clinton", "to": "andrew", "weight": 2 },
+    { "from": "gates", "to": "musk", "weight": 3 }
   ]
 }
