@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
         renderVideos();
     }
     if (document.getElementById('docs-container')) {
+        setupDocFilters();
         renderDocuments();
         setupPdfViewer();
     }
@@ -93,52 +94,173 @@ function renderVideos() {
     });
 }
 
-// --- PDF custom names (localStorage) ---
-function getPdfCustomNames() {
-    try {
-        return JSON.parse(localStorage.getItem('pdf-custom-names') || '{}');
-    } catch (e) {
-        return {};
+// --- Document filters state ---
+var activePersonFilter = 'all';
+var activeCategoryFilter = 'all';
+
+// --- Build filter bar ---
+function setupDocFilters() {
+    var filtersEl = document.getElementById('docs-filters');
+    if (!filtersEl || !SITE_DATA.documents) return;
+
+    // Collect unique persons from all documents
+    var personsSet = {};
+    SITE_DATA.documents.forEach(function (doc) {
+        (doc.persons || []).forEach(function (p) {
+            personsSet[p] = true;
+        });
+    });
+    var personsList = Object.keys(personsSet).sort();
+
+    // Collect categories that actually have documents
+    var usedCategories = {};
+    SITE_DATA.documents.forEach(function (doc) {
+        if (doc.category) usedCategories[doc.category] = true;
+    });
+
+    var categories = (SITE_DATA.docCategories || []).filter(function (c) {
+        return usedCategories[c.id];
+    });
+
+    // Build filter HTML
+    var html = '';
+
+    // Category filter
+    if (categories.length > 0) {
+        html += '<div class="filter-group">';
+        html += '<span class="filter-label">Category:</span>';
+        html += '<div class="filter-chips" id="filter-category">';
+        html += '<button class="filter-chip active" data-value="all">All</button>';
+        categories.forEach(function (cat) {
+            html += '<button class="filter-chip" data-value="' + escapeHtml(cat.id) + '">' + escapeHtml(cat.label) + '</button>';
+        });
+        html += '</div></div>';
+    }
+
+    // Person filter
+    if (personsList.length > 0) {
+        html += '<div class="filter-group">';
+        html += '<span class="filter-label">Person:</span>';
+        html += '<div class="filter-chips" id="filter-person">';
+        html += '<button class="filter-chip active" data-value="all">All</button>';
+        personsList.forEach(function (name) {
+            html += '<button class="filter-chip" data-value="' + escapeHtml(name) + '">' + escapeHtml(name) + '</button>';
+        });
+        html += '</div></div>';
+    }
+
+    filtersEl.innerHTML = html;
+
+    // Category chip click handlers
+    var catChips = filtersEl.querySelectorAll('#filter-category .filter-chip');
+    for (var i = 0; i < catChips.length; i++) {
+        catChips[i].addEventListener('click', function () {
+            activeCategoryFilter = this.getAttribute('data-value');
+            setActiveChip(filtersEl.querySelectorAll('#filter-category .filter-chip'), this);
+            renderDocuments();
+        });
+    }
+
+    // Person chip click handlers
+    var personChips = filtersEl.querySelectorAll('#filter-person .filter-chip');
+    for (var j = 0; j < personChips.length; j++) {
+        personChips[j].addEventListener('click', function () {
+            activePersonFilter = this.getAttribute('data-value');
+            setActiveChip(filtersEl.querySelectorAll('#filter-person .filter-chip'), this);
+            renderDocuments();
+        });
     }
 }
 
-function setPdfCustomName(filename, name) {
-    var names = getPdfCustomNames();
-    if (name && name.trim()) {
-        names[filename] = name.trim();
-    } else {
-        delete names[filename];
+function setActiveChip(chips, active) {
+    for (var i = 0; i < chips.length; i++) {
+        chips[i].classList.remove('active');
     }
-    localStorage.setItem('pdf-custom-names', JSON.stringify(names));
+    active.classList.add('active');
 }
 
-// --- Render documents ---
+// --- Render documents (grouped by category, filtered) ---
 function renderDocuments() {
     var container = document.getElementById('docs-container');
     if (!container || !SITE_DATA.documents) return;
 
-    var customNames = getPdfCustomNames();
+    container.innerHTML = '';
 
-    SITE_DATA.documents.forEach(function (doc) {
-        var card = document.createElement('button');
-        card.className = 'doc-card';
-        card.type = 'button';
+    // Filter documents
+    var filtered = SITE_DATA.documents.filter(function (doc) {
+        var catMatch = activeCategoryFilter === 'all' || doc.category === activeCategoryFilter;
+        var personMatch = activePersonFilter === 'all' ||
+            (doc.persons && doc.persons.indexOf(activePersonFilter) >= 0);
+        return catMatch && personMatch;
+    });
 
-        var displayTitle = customNames[doc.filename] || doc.title;
+    if (filtered.length === 0) {
+        container.innerHTML = '<p class="notes-empty">No documents match the selected filters.</p>';
+        return;
+    }
 
-        card.innerHTML =
-            '<div class="doc-icon">PDF</div>' +
-            '<div class="doc-info">' +
-                '<div class="doc-title">' + escapeHtml(displayTitle) + '</div>' +
-                '<div class="doc-filename">' + escapeHtml(doc.filename) + '</div>' +
-            '</div>' +
-            '<div class="doc-arrow">&#8250;</div>';
+    // Build category lookup
+    var catMap = {};
+    (SITE_DATA.docCategories || []).forEach(function (c) {
+        catMap[c.id] = c.label;
+    });
 
-        card.addEventListener('click', function () {
-            openPdfViewer(doc.url, displayTitle, doc.filename);
+    // Group by category
+    var groups = {};
+    var groupOrder = [];
+    filtered.forEach(function (doc) {
+        var cat = doc.category || 'other';
+        if (!groups[cat]) {
+            groups[cat] = [];
+            groupOrder.push(cat);
+        }
+        groups[cat].push(doc);
+    });
+
+    // Render each group
+    groupOrder.forEach(function (catId) {
+        var docs = groups[catId];
+        var catLabel = catMap[catId] || catId;
+
+        // Category header
+        var header = document.createElement('div');
+        header.className = 'docs-category-header';
+        header.textContent = catLabel;
+        container.appendChild(header);
+
+        // Document cards in this category
+        docs.forEach(function (doc) {
+            var card = document.createElement('button');
+            card.className = 'doc-card';
+            card.type = 'button';
+
+            var displayTitle = doc.displayName || doc.filename;
+
+            // Person tags
+            var personTags = '';
+            if (doc.persons && doc.persons.length > 0) {
+                personTags = '<div class="doc-persons">';
+                doc.persons.forEach(function (p) {
+                    personTags += '<span class="doc-person-tag">' + escapeHtml(p) + '</span>';
+                });
+                personTags += '</div>';
+            }
+
+            card.innerHTML =
+                '<div class="doc-icon">PDF</div>' +
+                '<div class="doc-info">' +
+                    '<div class="doc-title">' + escapeHtml(displayTitle) + '</div>' +
+                    '<div class="doc-filename">' + escapeHtml(doc.filename) + '</div>' +
+                    personTags +
+                '</div>' +
+                '<div class="doc-arrow">&#8250;</div>';
+
+            card.addEventListener('click', function () {
+                openPdfViewer(doc.url, displayTitle, doc.filename);
+            });
+
+            container.appendChild(card);
         });
-
-        container.appendChild(card);
     });
 }
 
@@ -328,18 +450,22 @@ function setupPdfViewer() {
     if (renameBtn) {
         renameBtn.addEventListener('click', function () {
             var titleEl = document.getElementById('pdf-title');
-            var customNames = getPdfCustomNames();
-            var currentName = customNames[currentPdfFilename] || titleEl.textContent;
-            var newName = prompt('Enter a custom name for this document:', currentName);
-            if (newName !== null) {
-                setPdfCustomName(currentPdfFilename, newName);
-                titleEl.textContent = newName || currentPdfFilename;
-                // Refresh the document list
-                var container = document.getElementById('docs-container');
-                if (container) {
-                    container.innerHTML = '';
-                    renderDocuments();
+            // Find the document in SITE_DATA
+            var doc = null;
+            for (var i = 0; i < SITE_DATA.documents.length; i++) {
+                if (SITE_DATA.documents[i].filename === currentPdfFilename) {
+                    doc = SITE_DATA.documents[i];
+                    break;
                 }
+            }
+            if (!doc) return;
+
+            var currentName = doc.displayName || doc.filename;
+            var newName = prompt('Enter a display name for this document:\n(The source filename "' + doc.filename + '" stays the same)', currentName);
+            if (newName !== null && newName.trim()) {
+                doc.displayName = newName.trim();
+                titleEl.textContent = doc.displayName;
+                renderDocuments();
             }
         });
     }

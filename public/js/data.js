@@ -27,52 +27,86 @@ const SITE_DATA = {
         { filename: "EFTA01648662.mp4", id: "EFTA01648662" },
     ],
 
+    // ------ DOCUMENT CATEGORIES ------
+    // Categories for organizing documents. Add new ones as needed.
+    // Each category has an id, a display label, and an icon label.
+    docCategories: [
+        { id: "court-docs",   label: "Court Documents" },
+        { id: "emails",       label: "E-mails" },
+        { id: "reports",      label: "Reports" },
+        { id: "financial",    label: "Financial Records" },
+        { id: "other",        label: "Other" },
+    ],
+
     // ------ DOCUMENTS (PDFs) ------
+    // displayName: What visitors see (e.g. "Epstein and Elon e-mails")
+    // filename:    The real government/evidence filename (never changes)
+    // url:         Path to the actual file
+    // category:    Must match a docCategories id above
+    // persons:     Array of person names this document relates to (for filtering)
     documents: [
         {
-            title: "EFTA00024813",
+            displayName: "EFTA00024813",
             filename: "EFTA00024813.pdf",
             url: "docs/court-documents/EFTA00024813.pdf",
+            category: "court-docs",
+            persons: ["Jeffrey Epstein"],
         },
         {
-            title: "EFTA00144401",
+            displayName: "EFTA00144401",
             filename: "EFTA00144401.pdf",
             url: "docs/court-documents/EFTA00144401.pdf",
+            category: "court-docs",
+            persons: ["Jeffrey Epstein"],
         },
         {
-            title: "EFTA00256291",
+            displayName: "EFTA00256291",
             filename: "EFTA00256291.pdf",
             url: "docs/court-documents/EFTA00256291.pdf",
+            category: "court-docs",
+            persons: ["Jeffrey Epstein"],
         },
         {
-            title: "EFTA00527356",
+            displayName: "EFTA00527356",
             filename: "EFTA00527356.pdf",
             url: "docs/court-documents/EFTA00527356.pdf",
+            category: "court-docs",
+            persons: ["Jeffrey Epstein"],
         },
         {
-            title: "EFTA01660651",
+            displayName: "EFTA01660651",
             filename: "EFTA01660651.pdf",
             url: "docs/court-documents/EFTA01660651.pdf",
+            category: "court-docs",
+            persons: ["Jeffrey Epstein"],
         },
         {
-            title: "EFTA02215818",
+            displayName: "EFTA02215818",
             filename: "EFTA02215818.pdf",
             url: "docs/court-documents/EFTA02215818.pdf",
+            category: "court-docs",
+            persons: ["Jeffrey Epstein"],
         },
         {
-            title: "EFTA02416106",
+            displayName: "EFTA02416106",
             filename: "EFTA02416106.pdf",
             url: "docs/court-documents/EFTA02416106.pdf",
+            category: "court-docs",
+            persons: ["Jeffrey Epstein"],
         },
         {
-            title: "EFTA02588450",
+            displayName: "EFTA02588450",
             filename: "EFTA02588450.pdf",
             url: "docs/court-documents/EFTA02588450.pdf",
+            category: "court-docs",
+            persons: ["Jeffrey Epstein"],
         },
         {
-            title: "Johnson v. Trump & Epstein Lawsuit",
+            displayName: "Johnson v. Trump & Epstein Lawsuit",
             filename: "Johnson_TrumpEpstein_Lawsuit.pdf",
             url: "docs/court-documents/Johnson_TrumpEpstein_Lawsuit.pdf",
+            category: "court-docs",
+            persons: ["Jeffrey Epstein", "Donald Trump"],
         },
     ],
 
