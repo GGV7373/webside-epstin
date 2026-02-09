@@ -165,6 +165,13 @@ const SITE_DATA = {
             persons: ["Terje Rod-Larsen", "Nicholas Noe"]
         },
         {
+            displayName: "Yong girls??",
+            filename: "EFTA00705860.pdf.",
+            url: "docs/emails/EFTA00705860.pdf",
+            category: "emails",
+            persons: ["Jeffrey Epstein"],
+        },
+        {
             displayName: "Trump lawsuit about rape, sex trafficking, and abuse",
             filename: "Johnson_TrumpEpstein_Lawsuit.pdf",
             url: "docs/court-documents/Johnson_TrumpEpstein_Lawsuit.pdf",
@@ -179,6 +186,11 @@ const SITE_DATA = {
             src: "images/EFTA00000466.webp",
             alt: "EFTA00000466",
             caption: "EFTA00000466",
+        },
+        {
+            src: "images/piglet.png",
+            alt: "EFTA00000467",
+            caption: "Piglet in the files?",
         },
     ],
 
