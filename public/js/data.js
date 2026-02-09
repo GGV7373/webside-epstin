@@ -91,7 +91,7 @@ const SITE_DATA = {
         {
             displayName: "Crime coverups",
             filename: "EFTA00072617.pdf",
-            url: "docs/court-documents/EFTA00072617.pdf",
+            url: "docs/emails/EFTA00072617.pdf",
             category: "emails",
         },
         {
@@ -111,56 +111,56 @@ const SITE_DATA = {
         {
             displayName: "Israeli operation in dubai",
             filename: "EFTA00763787.pdf",
-            url: "docs/court-documents/EFTA00763787.pdf",
+            url: "docs/emails/EFTA00763787.pdf",
             category: "emails",
             persons: ["Sultan Bin Sulayem, Jeffery Epstein"]
         },
         {
             displayName: "Beef jerky",
             filename: "EFTA00971523.pdf",
-            url: "docs/court-documents/EFTA00971523.pdf",
+            url: "docs/emails/EFTA00971523.pdf",
             category: "emails",
             persons: ["Jeffery Epstein", "Eva unknown"]
         },
         {
             displayName: "Libyan dealings",
             filename: "EFTA01205723.pdf",
-            url: "docs/court-documents/EFTA01205723.pdf",
+            url: "docs/emails/EFTA01205723.pdf",
             category: "emails",
             persons: ["Jeffery Epstein"]
         },
         {
             displayName: "Young woman, flight academy",
             filename: "EFTA01250248.pdf",
-            url: "docs/court-documents/EFTA01250248.pdf",
+            url: "docs/emails/EFTA01250248.pdf",
             category: "emails",
             persons: ["Ghislaine Maxwell", "Jeffery Epstein", "Mark Iverson", "Bill Richardson"]
         },
         {
             displayName: "Palestinian media watch subscription letter",
             filename: "EFTA01897628.pdf",
-            url: "docs/court-documents/EFTA01897628.pdf",
+            url: "docs/emails/EFTA01897628.pdf",
             category: "emails",
             persons: ["Palestinian Media Watch", "Jeffery Epstein"]
         },
         {
             displayName: "Naugthy french lessons",
             filename: "EFTA01965061.pdf",
-            url: "docs/court-documents/EFTA01965061.pdf",
+            url: "docs/emails/EFTA01965061.pdf",
             category: "emails",
             persons: ["Jeffery Epstein"]
         },
         {
             displayName: "EFTA01995685",
             filename: "EFTA01995685.pdf",
-            url: "docs/court-documents/EFTA01995685.pdf",
-            category: "court-docs",
+            url: "docs/emails/EFTA01995685.pdf",
+            category: "emails",
             persons: ["Anat Barak", "Jeffery Epstein", "Tali"]
         },
         {
             displayName: "Mossad operations inside iran",
             filename: "EFTA02404867.pdf",
-            url: "docs/court-documents/EFTA02404867.pdf",
+            url: "docs/emails/EFTA02404867.pdf",
             category: "emails",
             persons: ["Terje Rod-Larsen", "Nicholas Noe"]
         },
@@ -204,7 +204,8 @@ const SITE_DATA = {
         //     content: "What I noticed about this document..."
         // },
         {
-
+            title: "Interesting connections",
+            content: "It have been a lot of emails between Epstein and 'the jews' so did he have a secret alliance with the Mossad? Whas he a spy? Or just someone who selled informatino to the highest bidder? If so it intresting to see that USA still suport Israel. Becuse of ransoms?"
         }
     ],
 
