@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+            <meta name="description" content="The Epstein Files - Documents, videos, and evidence archive.">
+            <meta name="theme-color" content="#0a0a0f">
+            <title>The Epstein Files</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="css/styles.css">
+            <link rel="stylesheet" href="css/bulletin.css">
+        </head>
+    <body>
+
+        <div class="warning-overlay" id="warning-overlay">
+            <div class="warning-box">
+                <h2 class="warning-title">Content Warning</h2>
+                <p class="warning-text">This site contains sensitive material including court documents, legal filings, and video evidence related to the Epstein case. Some content may be disturbing or unsuitable for all audiences.</p>
+                <p class="warning-text">By continuing, you confirm that you are 18 or older and understand the nature of the content.</p>
+                <div class="warning-actions">
+                    <button class="warning-btn warning-btn-enter" id="warning-accept">I understand, continue</button>
+                    <button class="warning-btn warning-btn-leave" id="warning-leave">Leave</button>
+                </div>
+            </div>
+        </div>
+
+        <nav id="main-nav" class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-brand">The Epstein Files</a>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="videos.html" class="nav-link">Videos</a></li>
+                    <li><a href="buletingbord.html" class="nav-link active">Bulletin Board</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="bulletin-board" class="bulletin-board" aria-label="Bulletin board"></div>
+
+
+        <script src="js/bulletin.js"></script>
+        <script src="js/script.js"></script>
+    </body>
+</html>

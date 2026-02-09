@@ -1,0 +1,341 @@
+{
+  "persons": [
+    {
+      "id": "epstein",
+      "name": "Jeffrey Epstein",
+      "role": "Primary Suspect",
+      "tier": 0,
+      "age": "Deceased (66)",
+      "status": "Deceased",
+      "photo": "images/persons/epstin.jpg",
+      "reason": "Central figure in sex trafficking investigation. Convicted in 2008 on state charges, arrested in 2019 on federal charges.",
+      "details": "Financier and convicted sex offender. Operated a network involving properties in New York, Palm Beach, New Mexico, and the US Virgin Islands. Died by suicide in jail in August 2019 while awaiting trial.",
+      "documents": [
+        "EFTA00024813.pdf",
+        "EFTA00144401.pdf",
+        "EFTA00256291.pdf",
+        "EFTA00527356.pdf",
+        "EFTA01660651.pdf",
+        "EFTA02215818.pdf",
+        "EFTA02416106.pdf",
+        "EFTA02588450.pdf"
+      ]
+    },
+    {
+      "id": "maxwell",
+      "name": "Ghislaine Maxwell",
+      "role": "Close Associate and Co-Conspirator",
+      "tier": 1,
+      "age": "64",
+      "status": "Convicted and Imprisoned",
+      "photo": "images/persons/maxwell.jpg",
+      "reason": "Recruited and groomed underage victims for Epstein. Convicted in 2021 on five federal charges including sex trafficking of a minor.",
+      "details": "Longtime associate of Epstein. Sentenced to 20 years in prison in 2022. Currently serving sentence in federal prison."
+    },
+    {
+      "id": "brunel",
+      "name": "Jean-Luc Brunel",
+      "role": "Close Associate",
+      "tier": 1,
+      "age": "Deceased (74)",
+      "status": "Deceased",
+      "photo": "images/persons/Jean-Luc_Brunel.jpg",
+      "reason": "Modeling agent accused of supplying girls to Epstein. Named in documents and flight logs.",
+      "details": "French modeling scout charged with rape in France. Died by suicide in jail in 2022 while awaiting trial."
+    },
+    {
+      "id": "kellen",
+      "name": "Sarah Kellen",
+      "role": "Assistant and Scheduler",
+      "tier": 1,
+      "age": "40s",
+      "status": "Named in Documents",
+      "photo": "",
+      "reason": "Allegedly scheduled massages and managed victim interactions. Frequently mentioned in victim testimonies.",
+      "details": "Worked closely with Epstein and Maxwell. Granted immunity in 2008 Florida deal but named in later civil suits."
+    },
+    {
+      "id": "marcinkova",
+      "name": "Nadia Marcinkova",
+      "role": "Close Associate",
+      "tier": 1,
+      "age": "40s",
+      "status": "Named in Documents",
+      "photo": "",
+      "reason": "Allegedly participated in abuse and recruited victims. Frequent passenger on flights.",
+      "details": "Brought to the US by Epstein as a teenager. Granted immunity in 2008 but accused in civil cases."
+    },
+    {
+      "id": "andrew",
+      "name": "Prince Andrew",
+      "role": "Person of Interest",
+      "tier": 2,
+      "age": "65",
+      "status": "Named in Documents",
+      "photo": "images/persons/prince-andrew.jpg",
+      "reason": "Accused of sexual assault by Virginia Giuffre. Settled civil suit in 2022. Multiple visits to Epstein properties.",
+      "details": "Former Duke of York. Stripped of royal titles in 2022. Denies wrongdoing."
+    },
+    {
+      "id": "clinton",
+      "name": "Bill Clinton",
+      "role": "Person of Interest",
+      "tier": 2,
+      "age": "79",
+      "status": "Named in Documents",
+      "photo": "images/persons/bill_clinton.jpg",
+      "reason": "Flew on Epstein's plane multiple times. Mentioned in depositions and emails.",
+      "details": "Former US President. Traveled with Epstein for humanitarian work. Denies knowledge of crimes."
+    },
+    {
+      "id": "trump",
+      "name": "Donald Trump",
+      "role": "Person of Interest",
+      "tier": 2,
+      "age": "79",
+      "status": "Named in Documents",
+      "photo": "images/persons/donald_trump.jpg",
+      "reason": "Socialized with Epstein in the 1990s-2000s. Flew on plane several times. Mentioned in files.",
+      "details": "Former US President. Publicly distanced himself after 2008 conviction. Denies wrongdoing.",
+      "documents": [
+        "Johnson_TrumpEpstein_Lawsuit.pdf"
+      ]
+    },
+    {
+      "id": "dershowitz",
+      "name": "Alan Dershowitz",
+      "role": "Legal Associate",
+      "tier": 2,
+      "age": "87",
+      "status": "Named in Documents",
+      "photo": "images/persons/alan_dershowitz.jpg",
+      "reason": "Epstein's lawyer in 2008 plea deal. Accused by Giuffre of abuse (later retracted).",
+      "details": "Harvard law professor. Settled civil suits. Denies all allegations."
+    },
+    {
+      "id": "gates",
+      "name": "Bill Gates",
+      "role": "Business Associate",
+      "tier": 2,
+      "age": "70",
+      "status": "Named in Documents",
+      "photo": "images/persons/bill_gates.jpg",
+      "reason": "Met with Epstein multiple times post-conviction for philanthropy discussions.",
+      "details": "Microsoft co-founder. Regrets association. No accusations of wrongdoing."
+    },
+    {
+      "id": "musk",
+      "name": "Elon Musk",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "54",
+      "status": "Named in Documents",
+      "photo": "images/persons/elon_musk.jpg",
+      "reason": "Email correspondence about travel. Denies visiting island.",
+      "details": "Tesla and SpaceX CEO. Mentioned in files but denies close ties."
+    },
+    {
+      "id": "jackson",
+      "name": "Michael Jackson",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "Deceased (50)",
+      "status": "Named in Documents",
+      "photo": "images/persons/michael_jackson.jpg",
+      "reason": "Visited Epstein's Palm Beach home according to testimony.",
+      "details": "Pop star. No accusations of wrongdoing in Epstein case. Died in 2009."
+    },
+    {
+      "id": "copperfield",
+      "name": "David Copperfield",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "69",
+      "status": "Named in Documents",
+      "photo": "images/persons/david_copperfield.jpg",
+      "reason": "Mentioned in depositions as having been at Epstein's home.",
+      "details": "Magician. No accusations of wrongdoing."
+    },
+    {
+      "id": "allen",
+      "name": "Woody Allen",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "90",
+      "status": "Named in Documents",
+      "photo": "images/persons/woody_allen.jpg",
+      "reason": "Regular guest at Epstein's townhouse post-2010. Photographs and emails released in 2025 show social ties.",
+      "details": "Filmmaker. Helped by Epstein with college admission for daughter. Denies knowledge of crimes."
+    },
+    {
+      "id": "diaz",
+      "name": "Cameron Diaz",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "53",
+      "status": "Named in Documents",
+      "photo": "images/persons/cameron_diaz.jpg",
+      "reason": "Mentioned by accuser as name-dropped by Epstein. No direct involvement.",
+      "details": "Actress. Denies any association with Epstein."
+    },
+    {
+      "id": "dicaprio",
+      "name": "Leonardo DiCaprio",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "51",
+      "status": "Named in Documents",
+      "photo": "images/persons/leonardo_diCaprio.png",
+      "reason": "Mentioned in records as a contact. No evidence of meetings or involvement.",
+      "details": "Actor. No accusations of wrongdoing."
+    },
+    {
+      "id": "campbell",
+      "name": "Naomi Campbell",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "55",
+      "status": "Named in Documents",
+      "photo": "images/persons/naomi_campbell.jpg",
+      "reason": "Named in contact book and mentioned in files. Attended events.",
+      "details": "Model. Denies knowledge of Epstein's crimes."
+    },
+    {
+      "id": "jagger",
+      "name": "Mick Jagger",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "82",
+      "status": "Named in Documents",
+      "photo": "images/persons/mick_jagger.jpg",
+      "reason": "Photographed with Epstein and mentioned in files.",
+      "details": "Musician. No suggestion of involvement in crimes."
+    },
+    {
+      "id": "tucker",
+      "name": "Chris Tucker",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "54",
+      "status": "Named in Documents",
+      "photo": "images/persons/chris_tucker.jpg",
+      "reason": "Flew on Epstein's plane for humanitarian trip. Mentioned in documents.",
+      "details": "Actor. Denies knowledge of wrongdoing."
+    },
+    {
+      "id": "baldwin",
+      "name": "Alec Baldwin",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "67",
+      "status": "Named in Documents",
+      "photo": "images/persons/alec_baldwin.jpg",
+      "reason": "Listed in Epstein's contact book released in 2025.",
+      "details": "Actor. No accusations of involvement."
+    },
+    {
+      "id": "barak",
+      "name": "Ehud Barak",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "83",
+      "status": "Named in Documents",
+      "photo": "images/persons/ehud_barak.webp",
+      "reason": "Former Israeli PM mentioned in court documents and visited properties.",
+      "details": "Politician. Denies any wrongdoing."
+    },
+    {
+      "id": "lutnick",
+      "name": "Howard Lutnick",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "64",
+      "status": "Named in Documents",
+      "photo": "images/persons/howard_lutnick.jpg",
+      "reason": "Limited interactions mentioned in emails. No wrongdoing accused.",
+      "details": "Businessman. Photographed with Epstein."
+    },
+    {
+      "id": "summers",
+      "name": "Larry Summers",
+      "role": "Peripheral Contact",
+      "tier": 3,
+      "age": "71",
+      "status": "Named in Documents",
+      "photo": "images/persons/larry_summers.jpg",
+      "reason": "Economist with correspondence and meetings post-conviction.",
+      "details": "Former Treasury Secretary. No accusations."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "doc-court",
+      "type": "document",
+      "label": "COURT FILINGS",
+      "name": "Unsealed Court Documents",
+      "notes": "Documents from Giuffre v. Maxwell lawsuit unsealed in 2024, naming associates.",
+      "media": [{"type": "pdf", "url": "", "title": "Unsealed Epstein Files"}]
+    },
+    {
+      "id": "doc-flights",
+      "type": "document",
+      "label": "FLIGHT LOGS",
+      "name": "Private Jet Passenger Manifests",
+      "notes": "Logs showing passengers on Epstein's planes, including multiple trips by prominent figures."
+    },
+    {
+      "id": "doc-finance",
+      "type": "document",
+      "label": "FINANCIAL RECORDS",
+      "name": "Bank and Corporate Documents",
+      "notes": "Transactions and shell companies linked to Epstein's operations."
+    },
+    {
+      "id": "note-timeline",
+      "type": "note",
+      "label": "TIMELINE",
+      "text": "1990s-2000s: Peak activity. 2008: Florida plea deal. 2019: Federal arrest and death. 2021: Maxwell conviction. 2024-2026: Document releases."
+    },
+    {
+      "id": "loc-island",
+      "type": "tag",
+      "label": "LOCATION",
+      "name": "Little St. James Island, USVI"
+    },
+    {
+      "id": "loc-ny",
+      "type": "tag",
+      "label": "LOCATION",
+      "name": "Manhattan Townhouse"
+    },
+    {
+      "id": "loc-pb",
+      "type": "tag",
+      "label": "LOCATION",
+      "name": "Palm Beach Mansion"
+    }
+  ],
+  "extraConnections": [
+    { "from": "maxwell", "to": "epstein", "weight": 5 },
+    { "from": "maxwell", "to": "brunel", "weight": 3 },
+    { "from": "maxwell", "to": "kellen", "weight": 4 },
+    { "from": "epstein", "to": "andrew", "weight": 3 },
+    { "from": "epstein", "to": "clinton", "weight": 2 },
+    { "from": "epstein", "to": "trump", "weight": 2 },
+    { "from": "epstein", "to": "dershowitz", "weight": 3 },
+    { "from": "epstein", "to": "gates", "weight": 2 },
+    { "from": "epstein", "to": "musk", "weight": 1 },
+    { "from": "epstein", "to": "loc-island", "weight": 4 },
+    { "from": "epstein", "to": "loc-ny", "weight": 3 },
+    { "from": "kellen", "to": "loc-pb", "weight": 2 },
+    { "from": "epstein", "to": "allen", "weight": 1 },
+    { "from": "epstein", "to": "dicaprio", "weight": 1 },
+    { "from": "epstein", "to": "campbell", "weight": 1 },
+    { "from": "epstein", "to": "jagger", "weight": 1 },
+    { "from": "epstein", "to": "tucker", "weight": 1 },
+    { "from": "epstein", "to": "baldwin", "weight": 1 },
+    { "from": "epstein", "to": "barak", "weight": 1 },
+    { "from": "epstein", "to": "lutnick", "weight": 1 },
+    { "from": "epstein", "to": "summers", "weight": 1 }
+  ]
+}

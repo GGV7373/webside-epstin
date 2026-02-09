@@ -1,36 +1,29 @@
 document.addEventListener('DOMContentLoaded', function () {
     setupWarning();
-    renderVideos();
-    renderDocuments();
-    renderImages();
-    renderNotes();
-    renderVideoNotes();
     setupNavigation();
-    setupScrollSpy();
-    setupLightbox();
-    setupPdfViewer();
-});
-// --- Render video notes ---
-function renderVideoNotes() {
-    var container = document.getElementById('video-notes-container');
-    if (!container || !SITE_DATA.videoNotes) return;
 
-    if (SITE_DATA.videoNotes.length === 0) {
-        container.innerHTML = '<p class="notes-empty">No video notes yet. Add video notes in data.js.</p>';
-        return;
+    // Page-specific rendering
+    if (document.getElementById('videos-container')) {
+        renderVideos();
+    }
+    if (document.getElementById('docs-container')) {
+        setupDocFilters();
+        renderDocuments();
+        setupPdfViewer();
+    }
+    if (document.getElementById('gallery-container')) {
+        renderImages();
+        setupLightbox();
+    }
+    if (document.getElementById('notes-container')) {
+        renderNotes();
     }
 
-    SITE_DATA.videoNotes.forEach(function (note) {
-        var card = document.createElement('div');
-        card.className = 'note-card';
-
-        card.innerHTML =
-            '<h3 class="note-title">Video: ' + note.videoId + '</h3>' +
-            '<div class="note-content">' + note.content + '</div>';
-
-        container.appendChild(card);
-    });
-}
+    // Scroll spy only on pages with sections
+    if (document.querySelectorAll('.section').length) {
+        setupScrollSpy();
+    }
+});
 
 // --- Content warning popup ---
 function setupWarning() {
@@ -90,7 +83,7 @@ function renderVideos() {
             SITE_DATA.videoNotes.forEach(function(note) {
                 if (note.videoId === video.id) {
                     var caption = document.createElement('div');
-                    caption.className = 'gallery-caption'; // Use same class as image captions
+                    caption.className = 'gallery-caption';
                     caption.textContent = note.content;
                     card.appendChild(caption);
                 }
@@ -101,30 +94,180 @@ function renderVideos() {
     });
 }
 
-// --- Render documents ---
+// --- Document filters state ---
+var activePersonFilter = 'all';
+var activeCategoryFilter = 'all';
+
+// --- Build filter bar ---
+function setupDocFilters() {
+    var filtersEl = document.getElementById('docs-filters');
+    if (!filtersEl || !SITE_DATA.documents) return;
+
+    // Collect unique persons from all documents
+    var personsSet = {};
+    SITE_DATA.documents.forEach(function (doc) {
+        (doc.persons || []).forEach(function (p) {
+            personsSet[p] = true;
+        });
+    });
+    var personsList = Object.keys(personsSet).sort();
+
+    // Collect categories that actually have documents
+    var usedCategories = {};
+    SITE_DATA.documents.forEach(function (doc) {
+        if (doc.category) usedCategories[doc.category] = true;
+    });
+
+    var categories = (SITE_DATA.docCategories || []).filter(function (c) {
+        return usedCategories[c.id];
+    });
+
+    // Build filter HTML
+    var html = '';
+
+    // Category filter
+    if (categories.length > 0) {
+        html += '<div class="filter-group">';
+        html += '<span class="filter-label">Category:</span>';
+        html += '<div class="filter-chips" id="filter-category">';
+        html += '<button class="filter-chip active" data-value="all">All</button>';
+        categories.forEach(function (cat) {
+            html += '<button class="filter-chip" data-value="' + escapeHtml(cat.id) + '">' + escapeHtml(cat.label) + '</button>';
+        });
+        html += '</div></div>';
+    }
+
+    // Person filter
+    if (personsList.length > 0) {
+        html += '<div class="filter-group">';
+        html += '<span class="filter-label">Person:</span>';
+        html += '<div class="filter-chips" id="filter-person">';
+        html += '<button class="filter-chip active" data-value="all">All</button>';
+        personsList.forEach(function (name) {
+            html += '<button class="filter-chip" data-value="' + escapeHtml(name) + '">' + escapeHtml(name) + '</button>';
+        });
+        html += '</div></div>';
+    }
+
+    filtersEl.innerHTML = html;
+
+    // Category chip click handlers
+    var catChips = filtersEl.querySelectorAll('#filter-category .filter-chip');
+    for (var i = 0; i < catChips.length; i++) {
+        catChips[i].addEventListener('click', function () {
+            activeCategoryFilter = this.getAttribute('data-value');
+            setActiveChip(filtersEl.querySelectorAll('#filter-category .filter-chip'), this);
+            renderDocuments();
+        });
+    }
+
+    // Person chip click handlers
+    var personChips = filtersEl.querySelectorAll('#filter-person .filter-chip');
+    for (var j = 0; j < personChips.length; j++) {
+        personChips[j].addEventListener('click', function () {
+            activePersonFilter = this.getAttribute('data-value');
+            setActiveChip(filtersEl.querySelectorAll('#filter-person .filter-chip'), this);
+            renderDocuments();
+        });
+    }
+}
+
+function setActiveChip(chips, active) {
+    for (var i = 0; i < chips.length; i++) {
+        chips[i].classList.remove('active');
+    }
+    active.classList.add('active');
+}
+
+// --- Render documents (grouped by category, filtered) ---
 function renderDocuments() {
     var container = document.getElementById('docs-container');
     if (!container || !SITE_DATA.documents) return;
 
-    SITE_DATA.documents.forEach(function (doc) {
-        var card = document.createElement('button');
-        card.className = 'doc-card';
-        card.type = 'button';
+    container.innerHTML = '';
 
-        card.innerHTML =
-            '<div class="doc-icon">PDF</div>' +
-            '<div class="doc-info">' +
-                '<div class="doc-title">' + doc.title + '</div>' +
-                '<div class="doc-filename">' + doc.filename + '</div>' +
-            '</div>' +
-            '<div class="doc-arrow">&#8250;</div>';
-
-        card.addEventListener('click', function () {
-            openPdfViewer(doc.url, doc.title);
-        });
-
-        container.appendChild(card);
+    // Filter documents
+    var filtered = SITE_DATA.documents.filter(function (doc) {
+        var catMatch = activeCategoryFilter === 'all' || doc.category === activeCategoryFilter;
+        var personMatch = activePersonFilter === 'all' ||
+            (doc.persons && doc.persons.indexOf(activePersonFilter) >= 0);
+        return catMatch && personMatch;
     });
+
+    if (filtered.length === 0) {
+        container.innerHTML = '<p class="notes-empty">No documents match the selected filters.</p>';
+        return;
+    }
+
+    // Build category lookup
+    var catMap = {};
+    (SITE_DATA.docCategories || []).forEach(function (c) {
+        catMap[c.id] = c.label;
+    });
+
+    // Group by category
+    var groups = {};
+    var groupOrder = [];
+    filtered.forEach(function (doc) {
+        var cat = doc.category || 'other';
+        if (!groups[cat]) {
+            groups[cat] = [];
+            groupOrder.push(cat);
+        }
+        groups[cat].push(doc);
+    });
+
+    // Render each group
+    groupOrder.forEach(function (catId) {
+        var docs = groups[catId];
+        var catLabel = catMap[catId] || catId;
+
+        // Category header
+        var header = document.createElement('div');
+        header.className = 'docs-category-header';
+        header.textContent = catLabel;
+        container.appendChild(header);
+
+        // Document cards in this category
+        docs.forEach(function (doc) {
+            var card = document.createElement('button');
+            card.className = 'doc-card';
+            card.type = 'button';
+
+            var displayTitle = doc.displayName || doc.filename;
+
+            // Person tags
+            var personTags = '';
+            if (doc.persons && doc.persons.length > 0) {
+                personTags = '<div class="doc-persons">';
+                doc.persons.forEach(function (p) {
+                    personTags += '<span class="doc-person-tag">' + escapeHtml(p) + '</span>';
+                });
+                personTags += '</div>';
+            }
+
+            card.innerHTML =
+                '<div class="doc-icon">PDF</div>' +
+                '<div class="doc-info">' +
+                    '<div class="doc-title">' + escapeHtml(displayTitle) + '</div>' +
+                    '<div class="doc-filename">' + escapeHtml(doc.filename) + '</div>' +
+                    personTags +
+                '</div>' +
+                '<div class="doc-arrow">&#8250;</div>';
+
+            card.addEventListener('click', function () {
+                openPdfViewer(doc.url, displayTitle, doc.filename);
+            });
+
+            container.appendChild(card);
+        });
+    });
+}
+
+function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
 }
 
 // --- Render images ---
@@ -197,6 +340,25 @@ function setupNavigation() {
             });
         }
     }
+
+    // Auto-set active nav link based on current file path
+    try {
+        var path = window.location.pathname.split('/').pop();
+        if (!path) path = 'index.html';
+        var allNavLinks = document.querySelectorAll('.nav-link');
+        for (var j = 0; j < allNavLinks.length; j++) {
+            var href = allNavLinks[j].getAttribute('href');
+            // Normalize href (ignore query/hash)
+            var hrefFile = href.split('?')[0].split('#')[0];
+            if (hrefFile === path || (hrefFile === 'index.html' && path === 'index.html')) {
+                allNavLinks[j].classList.add('active');
+            } else {
+                allNavLinks[j].classList.remove('active');
+            }
+        }
+    } catch (e) {
+        // Silent fail — navigation still works without JS support for active state
+    }
 }
 
 // --- Scroll spy: highlight active nav link ---
@@ -267,11 +429,14 @@ function setupLightbox() {
 }
 
 // --- PDF Viewer ---
-function openPdfViewer(url, title) {
+var currentPdfFilename = '';
+
+function openPdfViewer(url, title, filename) {
     var viewer = document.getElementById('pdf-viewer');
     var frame = document.getElementById('pdf-frame');
     var titleEl = document.getElementById('pdf-title');
 
+    currentPdfFilename = filename || '';
     titleEl.textContent = title;
     frame.src = url;
     viewer.classList.add('open');
@@ -282,6 +447,7 @@ function setupPdfViewer() {
     var viewer = document.getElementById('pdf-viewer');
     var closeBtn = document.getElementById('pdf-close');
     var openBtn = document.getElementById('pdf-open-tab');
+    var renameBtn = document.getElementById('pdf-rename');
 
     if (!viewer || !closeBtn) return;
 
@@ -297,6 +463,29 @@ function setupPdfViewer() {
         openBtn.addEventListener('click', function () {
             var frame = document.getElementById('pdf-frame');
             window.open(frame.src, '_blank');
+        });
+    }
+
+    if (renameBtn) {
+        renameBtn.addEventListener('click', function () {
+            var titleEl = document.getElementById('pdf-title');
+            // Find the document in SITE_DATA
+            var doc = null;
+            for (var i = 0; i < SITE_DATA.documents.length; i++) {
+                if (SITE_DATA.documents[i].filename === currentPdfFilename) {
+                    doc = SITE_DATA.documents[i];
+                    break;
+                }
+            }
+            if (!doc) return;
+
+            var currentName = doc.displayName || doc.filename;
+            var newName = prompt('Enter a display name for this document:\n(The source filename "' + doc.filename + '" stays the same)', currentName);
+            if (newName !== null && newName.trim()) {
+                doc.displayName = newName.trim();
+                titleEl.textContent = doc.displayName;
+                renderDocuments();
+            }
         });
     }
 
