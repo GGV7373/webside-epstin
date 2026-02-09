@@ -132,11 +132,11 @@ const SITE_DATA = {
         },
         {
             videoId: "EFTA01622052",
-            content: "Video likely from when Epstein was probably in Sweden. Note the flag in the background. <a href=\"../index.html#documents\">Related documents</a>"
+            content: "Video likely from when Epstein was probably in Sweden. Note the flag in the background. </a>"
         },
         {
             videoId: "EFTA01648547",
-            content: "Video where a woman can be heard beating an animal or child with a baseball bat. It is also possible to hear a male moan in the background. <a href=\"../buletingbord.html\">Discuss on Bulletin Board</a>"
+            content: "Video where a woman can be heard beating an animal or child with a baseball bat. It is also possible to hear a male moan in the background. "
         }
         // Example:
         // {
