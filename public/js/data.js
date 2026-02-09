@@ -178,6 +178,13 @@ const SITE_DATA = {
             category: "court-docs",
             persons: ["Jeffrey Epstein", "Donald Trump"],
         },
+        {
+            displayName: "raport abut prins andrew",
+            filename: "EFTA01249597.pdf.pdf",
+            url: "docs/court-documents/EFTA01249597.pdf",
+            category: "court-documents",
+            persons: ["Jeffrey Epstein", "Prince Andrew"],
+        },
     ],
 
     // ------ IMAGES ------
