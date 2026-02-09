@@ -46,13 +46,6 @@ const SITE_DATA = {
     // persons:     Array of person names this document relates to (for filtering)
     documents: [
         {
-            displayName: "EFTA00024813",
-            filename: "EFTA00024813.pdf",
-            url: "docs/court-documents/EFTA00024813.pdf",
-            category: "court-docs",
-            persons: ["Jeffrey Epstein"],
-        },
-        {
             displayName: "EFTA00144401",
             filename: "EFTA00144401.pdf",
             url: "docs/court-documents/EFTA00144401.pdf",
@@ -60,49 +53,42 @@ const SITE_DATA = {
             persons: ["Jeffrey Epstein"],
         },
         {
-            displayName: "EFTA00256291",
-            filename: "EFTA00256291.pdf",
-            url: "docs/court-documents/EFTA00256291.pdf",
-            category: "court-docs",
-            persons: ["Jeffrey Epstein"],
-        },
-        {
-            displayName: "EFTA00527356",
+            displayName: "Order Pizza?",
             filename: "EFTA00527356.pdf",
-            url: "docs/court-documents/EFTA00527356.pdf",
-            category: "court-docs",
+            url: "docs/other/EFTA00527356.pdf",
+            category: "other",
             persons: ["Jeffrey Epstein"],
         },
         {
-            displayName: "EFTA01660651",
+            displayName: "Abut what hapend whit Epstein.",
             filename: "EFTA01660651.pdf",
             url: "docs/court-documents/EFTA01660651.pdf",
             category: "court-docs",
-            persons: ["Jeffrey Epstein"],
+            persons: ["Jeffrey Epstein", "Donald Trump", "Bill Clinton", "Ghislaine Maxwell"],
         },
         {
-            displayName: "EFTA02215818",
+            displayName: "About pizza?",
             filename: "EFTA02215818.pdf",
-            url: "docs/court-documents/EFTA02215818.pdf",
-            category: "court-docs",
+            url: "docs/emails/EFTA02215818.pdf",
+            category: "emails",
             persons: ["Jeffrey Epstein"],
         },
         {
-            displayName: "EFTA02416106",
+            displayName: "Unknown sender to Jeffrey",
             filename: "EFTA02416106.pdf",
-            url: "docs/court-documents/EFTA02416106.pdf",
-            category: "court-docs",
+            url: "docs/emails/EFTA02416106.pdf",
+            category: "emails",
             persons: ["Jeffrey Epstein"],
         },
         {
-            displayName: "EFTA02588450",
+            displayName: "Jeffrey and Elon E-mails",
             filename: "EFTA02588450.pdf",
-            url: "docs/court-documents/EFTA02588450.pdf",
-            category: "court-docs",
-            persons: ["Jeffrey Epstein"],
+            url: "docs/emails/EFTA02588450.pdf",
+            category: "emails",
+            persons: ["Jeffrey Epstein", "Elon Musk"],
         },
         {
-            displayName: "Johnson v. Trump & Epstein Lawsuit",
+            displayName: "Trump lawsuit about rape, sex trafficking, and abuse",
             filename: "Johnson_TrumpEpstein_Lawsuit.pdf",
             url: "docs/court-documents/Johnson_TrumpEpstein_Lawsuit.pdf",
             category: "court-docs",
@@ -128,6 +114,9 @@ const SITE_DATA = {
         //     title: "My note title",
         //     content: "What I noticed about this document..."
         // },
+        {
+
+        }
     ],
 
     // ------ VIDEO NOTES ------
