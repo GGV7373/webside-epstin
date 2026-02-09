@@ -220,12 +220,8 @@ const SITE_DATA = {
     // Add notes for videos here. Each note has a videoId and content.
     videoNotes: [
         {
-            videoId: "EFTA00123083",
-            content: "This video shows the entrance to the facility at 10:23pm. Notice the security guard in the background. <a href=\"../videos.html\">See all videos</a>"
-        },
-        {
             videoId: "EFTA01621067",
-            content: "The legendary temple on Epstein's private island. <a href=\"../images/evidence/temple.jpg\">View temple image</a>"
+            content: "The legendary temple on Epstein's private island."
         },
         {
             videoId: "EFTA01622052",
