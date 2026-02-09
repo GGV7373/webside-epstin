@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-            <meta name="apple-mobile-web-app-capable" content="yes">
-            <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-            <meta name="description" content="The Epstein Files - Documents, videos, and evidence archive.">
-            <meta name="theme-color" content="#0a0a0f">
-            <title>The Epstein Files</title>
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
-            <link rel="stylesheet" href="css/styles.css">
-            <link rel="stylesheet" href="css/bulletin.css">
-        </head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="description" content="The Epstein Files - Video Evidence Archive">
+        <meta name="theme-color" content="#0a0a0f">
+        <title>Videos - The Epstein Files</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
     <body>
 
+        <!-- CONTENT WARNING POPUP -->
         <div class="warning-overlay" id="warning-overlay">
             <div class="warning-box">
                 <h2 class="warning-title">Content Warning</h2>
@@ -28,6 +25,7 @@
             </div>
         </div>
 
+        <!-- STICKY NAVIGATION -->
         <nav id="main-nav" class="navbar">
             <div class="nav-container">
                 <a href="index.html" class="nav-brand">The Epstein Files</a>
@@ -35,7 +33,7 @@
                     <span class="hamburger"></span>
                 </button>
                 <ul class="nav-links" id="nav-links">
-                    <li><a href="videos.html" class="nav-link">Videos</a></li>
+                    <li><a href="videos.html" class="nav-link active">Videos</a></li>
                     <li><a href="index.html#documents" class="nav-link">Documents</a></li>
                     <li><a href="index.html#images" class="nav-link">Images</a></li>
                     <li><a href="index.html#notes" class="nav-link">Notes</a></li>
@@ -44,10 +42,24 @@
             </div>
         </nav>
 
-        <div id="bulletin-board" class="bulletin-board" aria-label="Bulletin board"></div>
+        <main>
+            <!-- VIDEOS SECTION -->
+            <section id="videos" class="section">
+                <div class="section-container">
+                    <h2 class="section-title">Videos</h2>
+                    <div class="media-grid" id="videos-container"></div>
+                </div>
+            </section>
+        </main>
 
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-container">
+                <p>For informational and educational purposes only.</p>
+            </div>
+        </footer>
 
-        <script src="js/bulletin.js"></script>
+        <script src="js/data.js"></script>
         <script src="js/script.js"></script>
     </body>
 </html>

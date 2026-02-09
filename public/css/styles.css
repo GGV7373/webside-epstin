@@ -566,6 +566,23 @@ a {
     color: var(--color-accent);
 }
 
+.pdf-rename {
+    background: none;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-size: var(--fs-xs);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    white-space: nowrap;
+}
+
+.pdf-rename:active {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
 .pdf-close {
     background: none;
     border: none;
@@ -675,5 +692,94 @@ a {
 
     .pdf-header {
         padding-top: calc(var(--spacing-xs) + env(safe-area-inset-top));
+    }
+
+    .lightbox-close {
+        top: calc(var(--spacing-sm) + env(safe-area-inset-top));
+    }
+
+    .nav-links {
+        top: calc(var(--nav-height) + env(safe-area-inset-top));
+    }
+}
+
+/* --- Mobile touch & interaction improvements --- */
+@media (max-width: 640px) {
+    .warning-btn {
+        padding: 0.875rem var(--spacing-md);
+        font-size: var(--fs-body);
+        min-height: 44px;
+    }
+
+    .doc-card {
+        min-height: 56px;
+        padding: var(--spacing-sm);
+    }
+
+    .nav-link {
+        padding: 0.875rem var(--container-padding);
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    .pdf-header {
+        padding: var(--spacing-sm);
+        gap: var(--spacing-xs);
+        flex-wrap: wrap;
+    }
+
+    .pdf-title {
+        flex: 1 1 100%;
+        white-space: normal;
+        font-size: var(--fs-small);
+        line-height: 1.3;
+    }
+
+    .pdf-actions {
+        flex: 1 1 100%;
+        justify-content: flex-end;
+    }
+
+    .pdf-open-tab,
+    .pdf-rename {
+        padding: 6px 12px;
+        font-size: var(--fs-small);
+        min-height: 36px;
+    }
+
+    .pdf-close {
+        font-size: 2rem;
+        padding: 0 var(--spacing-sm);
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .lightbox-close {
+        font-size: 2.5rem;
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .section {
+        padding: var(--spacing-lg) 0;
+    }
+
+    .section-title {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .video-card {
+        padding: var(--spacing-xs);
+    }
+
+    .gallery-item img {
+        border-radius: var(--radius-sm);
     }
 }

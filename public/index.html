@@ -33,7 +33,7 @@
                     <span class="hamburger"></span>
                 </button>
                 <ul class="nav-links" id="nav-links">
-                    <li><a href="#videos" class="nav-link">Videos</a></li>
+                    <li><a href="videos.html" class="nav-link">Videos</a></li>
                     <li><a href="#documents" class="nav-link">Documents</a></li>
                     <li><a href="#images" class="nav-link">Images</a></li>
                     <li><a href="#notes" class="nav-link">Notes</a></li>
@@ -43,16 +43,8 @@
         </nav>
 
         <main>
-            <!-- VIDEOS SECTION -->
-            <section id="videos" class="section">
-                <div class="section-container">
-                    <h2 class="section-title">Videos</h2>
-                    <div class="media-grid" id="videos-container"></div>
-                </div>
-            </section>
-
             <!-- DOCUMENTS SECTION -->
-            <section id="documents" class="section section-alt">
+            <section id="documents" class="section">
                 <div class="section-container">
                     <h2 class="section-title">Documents</h2>
                     <div class="docs-list" id="docs-container"></div>
@@ -60,7 +52,7 @@
             </section>
 
             <!-- IMAGES SECTION -->
-            <section id="images" class="section">
+            <section id="images" class="section section-alt">
                 <div class="section-container">
                     <h2 class="section-title">Images</h2>
                     <div class="gallery-grid" id="gallery-container"></div>
@@ -68,7 +60,7 @@
             </section>
 
             <!-- NOTES SECTION -->
-            <section id="notes" class="section section-alt">
+            <section id="notes" class="section">
                 <div class="section-container">
                     <h2 class="section-title">Notes</h2>
                     <div class="notes-list" id="notes-container"></div>
@@ -95,6 +87,7 @@
             <div class="pdf-header">
                 <span class="pdf-title" id="pdf-title"></span>
                 <div class="pdf-actions">
+                    <button class="pdf-rename" id="pdf-rename" aria-label="Rename document">Rename</button>
                     <button class="pdf-open-tab" id="pdf-open-tab" aria-label="Open in new tab">Open in tab</button>
                     <button class="pdf-close" id="pdf-close" aria-label="Close">&times;</button>
                 </div>

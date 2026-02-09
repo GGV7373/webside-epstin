@@ -392,7 +392,7 @@ function renderBoard(container, data) {
     var entry = itemMap.get(p.id);
     if (!entry) return;
     entry.el.addEventListener('click', function () {
-      openPersonModal(modal, p, connMap[p.id] || []);
+      openPersonModal(modal, p, connMap[p.id] || [], data);
     });
   });
 
@@ -527,9 +527,10 @@ function statusClass(status) {
   return 'status-named';
 }
 
-function openPersonModal(modal, person, connectedNames) {
+function openPersonModal(modal, person, connectedNames, data) {
   var body = modal.querySelector('.modal-body');
   body.innerHTML = '';
+  body.classList.remove('evidence-detail');
 
   /* Header: photo + name + role + status */
   var header = el('div', 'detail-header');
@@ -589,6 +590,25 @@ function openPersonModal(modal, person, connectedNames) {
     var txt2 = el('div', 'detail-section-text'); txt2.textContent = person.details;
     sec2.append(t2, txt2);
     body.appendChild(sec2);
+  }
+
+  /* Linked Documents */
+  if (person.documents && person.documents.length > 0) {
+    var secDocs = el('div', 'detail-section');
+    var tDocs = el('div', 'detail-section-title'); tDocs.textContent = 'Linked Documents';
+    secDocs.appendChild(tDocs);
+
+    var docList = el('div', 'detail-doc-list');
+    person.documents.forEach(function (filename) {
+      var docLink = el('a', 'detail-doc-link');
+      docLink.textContent = filename;
+      docLink.href = 'docs/court-documents/' + filename;
+      docLink.target = '_blank';
+      docLink.rel = 'noopener';
+      docList.appendChild(docLink);
+    });
+    secDocs.appendChild(docList);
+    body.appendChild(secDocs);
   }
 
   /* Connected to */

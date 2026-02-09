@@ -9,7 +9,17 @@
       "status": "Deceased",
       "photo": "images/persons/epstin.jpg",
       "reason": "Central figure in sex trafficking investigation. Convicted in 2008 on state charges, arrested in 2019 on federal charges.",
-      "details": "Financier and convicted sex offender. Operated a network involving properties in New York, Palm Beach, New Mexico, and the US Virgin Islands. Died by suicide in jail in August 2019 while awaiting trial."
+      "details": "Financier and convicted sex offender. Operated a network involving properties in New York, Palm Beach, New Mexico, and the US Virgin Islands. Died by suicide in jail in August 2019 while awaiting trial.",
+      "documents": [
+        "EFTA00024813.pdf",
+        "EFTA00144401.pdf",
+        "EFTA00256291.pdf",
+        "EFTA00527356.pdf",
+        "EFTA01660651.pdf",
+        "EFTA02215818.pdf",
+        "EFTA02416106.pdf",
+        "EFTA02588450.pdf"
+      ]
     },
     {
       "id": "maxwell",
@@ -86,7 +96,10 @@
       "status": "Named in Documents",
       "photo": "images/persons/donald_trump.jpg",
       "reason": "Socialized with Epstein in the 1990s-2000s. Flew on plane several times. Mentioned in files.",
-      "details": "Former US President. Publicly distanced himself after 2008 conviction. Denies wrongdoing."
+      "details": "Former US President. Publicly distanced himself after 2008 conviction. Denies wrongdoing.",
+      "documents": [
+        "Johnson_TrumpEpstein_Lawsuit.pdf"
+      ]
     },
     {
       "id": "dershowitz",

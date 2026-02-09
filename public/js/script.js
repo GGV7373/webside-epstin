@@ -1,36 +1,28 @@
 document.addEventListener('DOMContentLoaded', function () {
     setupWarning();
-    renderVideos();
-    renderDocuments();
-    renderImages();
-    renderNotes();
-    renderVideoNotes();
     setupNavigation();
-    setupScrollSpy();
-    setupLightbox();
-    setupPdfViewer();
-});
-// --- Render video notes ---
-function renderVideoNotes() {
-    var container = document.getElementById('video-notes-container');
-    if (!container || !SITE_DATA.videoNotes) return;
 
-    if (SITE_DATA.videoNotes.length === 0) {
-        container.innerHTML = '<p class="notes-empty">No video notes yet. Add video notes in data.js.</p>';
-        return;
+    // Page-specific rendering
+    if (document.getElementById('videos-container')) {
+        renderVideos();
+    }
+    if (document.getElementById('docs-container')) {
+        renderDocuments();
+        setupPdfViewer();
+    }
+    if (document.getElementById('gallery-container')) {
+        renderImages();
+        setupLightbox();
+    }
+    if (document.getElementById('notes-container')) {
+        renderNotes();
     }
 
-    SITE_DATA.videoNotes.forEach(function (note) {
-        var card = document.createElement('div');
-        card.className = 'note-card';
-
-        card.innerHTML =
-            '<h3 class="note-title">Video: ' + note.videoId + '</h3>' +
-            '<div class="note-content">' + note.content + '</div>';
-
-        container.appendChild(card);
-    });
-}
+    // Scroll spy only on pages with sections
+    if (document.querySelectorAll('.section').length) {
+        setupScrollSpy();
+    }
+});
 
 // --- Content warning popup ---
 function setupWarning() {
@@ -90,7 +82,7 @@ function renderVideos() {
             SITE_DATA.videoNotes.forEach(function(note) {
                 if (note.videoId === video.id) {
                     var caption = document.createElement('div');
-                    caption.className = 'gallery-caption'; // Use same class as image captions
+                    caption.className = 'gallery-caption';
                     caption.textContent = note.content;
                     card.appendChild(caption);
                 }
@@ -101,30 +93,59 @@ function renderVideos() {
     });
 }
 
+// --- PDF custom names (localStorage) ---
+function getPdfCustomNames() {
+    try {
+        return JSON.parse(localStorage.getItem('pdf-custom-names') || '{}');
+    } catch (e) {
+        return {};
+    }
+}
+
+function setPdfCustomName(filename, name) {
+    var names = getPdfCustomNames();
+    if (name && name.trim()) {
+        names[filename] = name.trim();
+    } else {
+        delete names[filename];
+    }
+    localStorage.setItem('pdf-custom-names', JSON.stringify(names));
+}
+
 // --- Render documents ---
 function renderDocuments() {
     var container = document.getElementById('docs-container');
     if (!container || !SITE_DATA.documents) return;
+
+    var customNames = getPdfCustomNames();
 
     SITE_DATA.documents.forEach(function (doc) {
         var card = document.createElement('button');
         card.className = 'doc-card';
         card.type = 'button';
 
+        var displayTitle = customNames[doc.filename] || doc.title;
+
         card.innerHTML =
             '<div class="doc-icon">PDF</div>' +
             '<div class="doc-info">' +
-                '<div class="doc-title">' + doc.title + '</div>' +
-                '<div class="doc-filename">' + doc.filename + '</div>' +
+                '<div class="doc-title">' + escapeHtml(displayTitle) + '</div>' +
+                '<div class="doc-filename">' + escapeHtml(doc.filename) + '</div>' +
             '</div>' +
             '<div class="doc-arrow">&#8250;</div>';
 
         card.addEventListener('click', function () {
-            openPdfViewer(doc.url, doc.title);
+            openPdfViewer(doc.url, displayTitle, doc.filename);
         });
 
         container.appendChild(card);
     });
+}
+
+function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
 }
 
 // --- Render images ---
@@ -267,11 +288,14 @@ function setupLightbox() {
 }
 
 // --- PDF Viewer ---
-function openPdfViewer(url, title) {
+var currentPdfFilename = '';
+
+function openPdfViewer(url, title, filename) {
     var viewer = document.getElementById('pdf-viewer');
     var frame = document.getElementById('pdf-frame');
     var titleEl = document.getElementById('pdf-title');
 
+    currentPdfFilename = filename || '';
     titleEl.textContent = title;
     frame.src = url;
     viewer.classList.add('open');
@@ -282,6 +306,7 @@ function setupPdfViewer() {
     var viewer = document.getElementById('pdf-viewer');
     var closeBtn = document.getElementById('pdf-close');
     var openBtn = document.getElementById('pdf-open-tab');
+    var renameBtn = document.getElementById('pdf-rename');
 
     if (!viewer || !closeBtn) return;
 
@@ -297,6 +322,25 @@ function setupPdfViewer() {
         openBtn.addEventListener('click', function () {
             var frame = document.getElementById('pdf-frame');
             window.open(frame.src, '_blank');
+        });
+    }
+
+    if (renameBtn) {
+        renameBtn.addEventListener('click', function () {
+            var titleEl = document.getElementById('pdf-title');
+            var customNames = getPdfCustomNames();
+            var currentName = customNames[currentPdfFilename] || titleEl.textContent;
+            var newName = prompt('Enter a custom name for this document:', currentName);
+            if (newName !== null) {
+                setPdfCustomName(currentPdfFilename, newName);
+                titleEl.textContent = newName || currentPdfFilename;
+                // Refresh the document list
+                var container = document.getElementById('docs-container');
+                if (container) {
+                    container.innerHTML = '';
+                    renderDocuments();
+                }
+            }
         });
     }
 
