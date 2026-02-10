@@ -34,5 +34,6 @@ Thumbs.db
 *.iml
 
 # Ignore Claude temp folders
-tmpclaude-*-cwd/
+tmpclaude-*/
+
 
