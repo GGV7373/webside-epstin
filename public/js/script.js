@@ -1,29 +1,50 @@
-document.addEventListener('DOMContentLoaded', function () {
-    setupWarning();
-    setupNavigation();
+// Load site data from JSON then initialize app
+function startApp() {
+    function ready() {
+        setupWarning();
+        setupNavigation();
 
-    // Page-specific rendering
-    if (document.getElementById('videos-container')) {
-        renderVideos();
-    }
-    if (document.getElementById('docs-container')) {
-        setupDocFilters();
-        renderDocuments();
-        setupPdfViewer();
-    }
-    if (document.getElementById('gallery-container')) {
-        renderImages();
-        setupLightbox();
-    }
-    if (document.getElementById('notes-container')) {
-        renderNotes();
+        // Page-specific rendering
+        if (document.getElementById('videos-container')) {
+            renderVideos();
+        }
+        if (document.getElementById('docs-container')) {
+            setupDocFilters();
+            renderDocuments();
+            setupPdfViewer();
+        }
+        if (document.getElementById('gallery-container')) {
+            renderImages();
+            setupLightbox();
+        }
+        if (document.getElementById('notes-container')) {
+            renderNotes();
+        }
+
+        // Scroll spy only on pages with sections
+        if (document.querySelectorAll('.section').length) {
+            setupScrollSpy();
+        }
     }
 
-    // Scroll spy only on pages with sections
-    if (document.querySelectorAll('.section').length) {
-        setupScrollSpy();
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ready);
+    } else {
+        ready();
     }
-});
+}
+
+fetch('data/site_data.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+        window.SITE_DATA = data;
+        startApp();
+    })
+    .catch(function () {
+        // If load fails, fall back to any existing SITE_DATA and start anyway
+        window.SITE_DATA = window.SITE_DATA || {};
+        startApp();
+    });
 
 // --- Content warning popup ---
 function setupWarning() {
