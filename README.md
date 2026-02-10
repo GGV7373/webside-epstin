@@ -6,114 +6,17 @@ This project is a static web archive for organizing and viewing documents, video
 
 ---
 
-## How to add a PDF
+## Contributing
 
-### Step 1 - Put the PDF in the right folder
+The site is rebuilt automatically on every push. Data is generated from the files in the repository plus optional overrides in `public/data/metadata.json`.
 
-Pick the folder that matches the type of document:
+**Adding content is simple:**
+- **PDFs** -- drop into the right `public/docs/` subfolder and push
+- **Videos** -- drop `.mp4` into `public/videos/` and push
+- **Images** -- drop into `public/images/` and push
+- **Titles and person tags** -- edit `public/data/metadata.json` (optional)
 
-| Folder                        | Use for                    |
-|-------------------------------|----------------------------|
-| `public/docs/court-documents/`| Court filings, legal docs  |
-| `public/docs/emails/`         | E-mails                    |
-| `public/docs/other/`          | Anything else              |
-
-Just drag or copy the PDF file into the folder. That is all you need to do for it to show up on the site.
-
-### Step 2 (optional) - Give it a name and tag persons
-
-If you skip this step the PDF will show up with its filename as the title (for example "EFTA01234567"). If you want a readable name or want to tag which persons are mentioned in the document, open the file:
-
-```
-public/data/metadata.json
-```
-
-Find the `"documentOverrides"` section and add a new line for your PDF. Copy this template and change the values:
-
-```json
-"YOUR_FILENAME.pdf": {
-  "displayName": "A short title for the document",
-  "persons": ["Person One", "Person Two"]
-}
-```
-
-**Example** - you added a PDF called `EFTA09999999.pdf` to the emails folder:
-
-```json
-"EFTA09999999.pdf": {
-  "displayName": "Email about money transfers",
-  "persons": ["Jeffrey Epstein", "Bill Gates"]
-}
-```
-
-Make sure to:
-- Put a comma after the previous entry before adding yours
-- Use the exact filename (including `.pdf`)
-- Put each person name as a separate item in the list
-
-You can also skip `"persons"` if you do not know who is in the document:
-
-```json
-"EFTA09999999.pdf": {
-  "displayName": "Email about money transfers"
-}
-```
-
-### Step 3 - Push to git
-
-```
-git add .
-git commit -m "Add new document"
-git push
-```
-
-Netlify will automatically rebuild the site. Your PDF will appear within a few minutes.
-
----
-
-## How to add a video
-
-1. Put the video file (`.mp4`) in `public/videos/`
-2. Push to git
-3. Done - it shows up automatically
-
-To add a note/caption under a video, open `public/data/metadata.json` and add an entry to the `"videoNotes"` list:
-
-```json
-{ "videoId": "EFTA01234567", "content": "Description of the video." }
-```
-
-The `videoId` is the filename without `.mp4`.
-
----
-
-## How to add an image
-
-1. Put the image file (`.jpg`, `.png`, `.webp`) in `public/images/`
-2. Push to git
-3. Done - it shows up in the gallery automatically
-
-To add a caption, open `public/data/metadata.json` and add an entry to `"imageOverrides"`:
-
-```json
-"myimage.jpg": {
-  "alt": "Short description",
-  "caption": "Caption shown under the image"
-}
-```
-
----
-
-## How to add a note
-
-Open `public/data/metadata.json` and add an entry to the `"notes"` list:
-
-```json
-{
-  "title": "My note title",
-  "content": "The text of the note."
-}
-```
+For full step-by-step instructions (including how to do it on GitHub.com without installing anything), see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
